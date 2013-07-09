@@ -1,0 +1,7 @@
+Task List
+---------
+
+*Machine Learning Research/Tutorial Projects
+*Determine Project Direction
+ **Develop Plan for project
+
