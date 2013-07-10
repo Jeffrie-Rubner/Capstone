@@ -1,0 +1,6 @@
+Week 1
+------
+Write a machine learning program
+The program will be able to differentiate colors
+It will determine if a color is red or blue
+The program will give a percentage chance for it to be a certain color
