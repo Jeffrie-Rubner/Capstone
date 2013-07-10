@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Drawing;
+
+namespace ColorDifferentiator
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Slider_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                var slider = (Slider)sender;
+                Point position = e.GetPosition(slider);
+                double d = 1.0d / slider.ActualWidth * position.X;
+                var p = slider.Maximum * d;
+                slider.Value = p;
+                if(slider.Name.Equals("RedSlider"))
+                {
+                    RedNum.Text = "" + (int)slider.Value;
+                }
+                else if(slider.Name.Equals("BlueSlider"))
+                {
+                    BlueNum.Text = "" + (int)slider.Value;
+                }
+                else if (slider.Name.Equals("GreenSlider"))
+                {
+                    GreenNum.Text = "" + (int)slider.Value;
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
+}
