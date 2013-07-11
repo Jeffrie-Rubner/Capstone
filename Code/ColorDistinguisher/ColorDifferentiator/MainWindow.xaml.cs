@@ -21,10 +21,12 @@ namespace ColorDifferentiator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ColorDefiner colorDefiner;
 
         public MainWindow()
         {
             InitializeComponent();
+            colorDefiner = new ColorDefiner();
         }
 
         private void Slider_OnMouseMove(object sender, MouseEventArgs e)
@@ -48,16 +50,22 @@ namespace ColorDifferentiator
                 {
                     GreenNum.Text = "" + (int)slider.Value;
                 }
-                byte redval = ((int)RedSlider.Value) > 255 ? (byte)255 : (byte)((int)RedSlider.Value);
-                byte blueval = ((int)BlueSlider.Value) > 255 ? (byte)255 : (byte)((int)BlueSlider.Value);
-                byte greenval = ((int)GreenSlider.Value) > 255 ? (byte)255 : (byte)((int)GreenSlider.Value);
-                ColorChosen.Fill = new SolidColorBrush(Color.FromRgb(redval, blueval, greenval));
+                updateColorBox();
             }
         }
 
+        private void updateColorBox()
+        {
+            byte redval = ((int)RedSlider.Value) > 255 ? (byte)255 : (byte)((int)RedSlider.Value);
+            byte blueval = ((int)BlueSlider.Value) > 255 ? (byte)255 : (byte)((int)BlueSlider.Value);
+            byte greenval = ((int)GreenSlider.Value) > 255 ? (byte)255 : (byte)((int)GreenSlider.Value);
+            ColorChosen.Fill = new SolidColorBrush(Color.FromRgb(redval, greenval, blueval));
+        }
+
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            colorDefiner.ClassifyColor();
         }
     }
 }
