@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Color Determiner" Height="365" Width="520">
     <Grid>
-        <Button Content="Submit" HorizontalAlignment="Left" Margin="408,245,0,0" VerticalAlignment="Top" Width="60" Height="20"/>
+        <Button Content="Submit" Click="Button_Click_1"  HorizontalAlignment="Left" Margin="408,245,0,0" VerticalAlignment="Top" Width="60" Height="20"/>
         <Grid Margin="10,60,393,90" HorizontalAlignment="Left">
             <Slider x:Name ="RedSlider" MouseMove="Slider_OnMouseMove" IsMoveToPointEnabled="True"
         		Minimum="0" Maximum="256" 

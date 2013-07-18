@@ -44,8 +44,36 @@ namespace ColorDifferentiator
 
 
         //This method will be the machine learning method that determines what group a color belongs to
-        public void ClassifyColor()
+        public String ClassifyColor(Color input)
         {
+            double redChance = 0.00;
+            double blueChance = 0.00;
+            foreach (Color c in redShades)
+            {
+                double redRatio = Math.Abs(c.R - input.R) / 255;
+                double greenRatio = Math.Abs(c.G - input.G) / 255;
+                double blueRatio = Math.Abs(c.B - input.B) / 255;
+                double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio)/3);
+                redChance = redChance > totalColorDifferenceRatio ? redChance : totalColorDifferenceRatio;
+            }
+            foreach (Color c in blueShades)
+            {
+                double redRatio = Math.Abs(c.R - input.R) / 255;
+                double greenRatio = Math.Abs(c.G - input.G) / 255;
+                double blueRatio = Math.Abs(c.B - input.B) / 255;
+                double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio) / 3);
+                blueChance = blueChance > totalColorDifferenceRatio ? blueChance : totalColorDifferenceRatio;
+            }
+            if (redChance > blueChance)
+            {
+                redShades.Add(input);
+            }
+            else
+            {
+                blueShades.Add(input);
+            }
+
+            return redChance > blueChance ? "red" : "blue";
 
         }
 

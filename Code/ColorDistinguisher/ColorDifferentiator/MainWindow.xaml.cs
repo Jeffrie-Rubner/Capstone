@@ -22,11 +22,12 @@ namespace ColorDifferentiator
     public partial class MainWindow : Window
     {
         private ColorDefiner colorDefiner;
-
+        private Color CurrentColorOfRectangle;
         public MainWindow()
         {
             InitializeComponent();
             colorDefiner = new ColorDefiner();
+            updateColorBox();
         }
 
         private void Slider_OnMouseMove(object sender, MouseEventArgs e)
@@ -38,11 +39,11 @@ namespace ColorDifferentiator
                 double d = 1.0d / slider.ActualWidth * position.X;
                 var p = slider.Maximum * d;
                 slider.Value = p;
-                if(slider.Name.Equals("RedSlider"))
+                if (slider.Name.Equals("RedSlider"))
                 {
                     RedNum.Text = "" + (int)slider.Value;
                 }
-                else if(slider.Name.Equals("BlueSlider"))
+                else if (slider.Name.Equals("BlueSlider"))
                 {
                     BlueNum.Text = "" + (int)slider.Value;
                 }
@@ -59,13 +60,14 @@ namespace ColorDifferentiator
             byte redval = ((int)RedSlider.Value) > 255 ? (byte)255 : (byte)((int)RedSlider.Value);
             byte blueval = ((int)BlueSlider.Value) > 255 ? (byte)255 : (byte)((int)BlueSlider.Value);
             byte greenval = ((int)GreenSlider.Value) > 255 ? (byte)255 : (byte)((int)GreenSlider.Value);
-            ColorChosen.Fill = new SolidColorBrush(Color.FromRgb(redval, greenval, blueval));
+            CurrentColorOfRectangle = Color.FromRgb(redval, greenval, blueval);
+            ColorChosen.Fill = new SolidColorBrush(CurrentColorOfRectangle);
         }
 
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            colorDefiner.ClassifyColor();
+            colorDefiner.ClassifyColor(CurrentColorOfRectangle);
         }
     }
 }
