@@ -21,7 +21,7 @@ namespace ColorDifferentiator
 
         public ColorDefiner()
         {
-
+            InitializeColorLists();
         }
 
         public void InitializeColorLists()
@@ -53,7 +53,7 @@ namespace ColorDifferentiator
                 double redRatio = ((double)Math.Abs(c.R - input.R)) / 255;
                 double greenRatio = ((double)Math.Abs(c.G - input.G)) / 255;
                 double blueRatio = ((double)Math.Abs(c.B - input.B)) / 255;
-                double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio)/3);
+                double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio)/3.00);
                 redChance = redChance > totalColorDifferenceRatio ? redChance : totalColorDifferenceRatio;
             }
             foreach (Color c in blueShades)
@@ -61,7 +61,7 @@ namespace ColorDifferentiator
                 double redRatio = ((double)Math.Abs(c.R - input.R)) / 255.0;
                 double greenRatio = ((double)Math.Abs(c.G - input.G)) / 255.0;
                 double blueRatio = ((double)Math.Abs(c.B - input.B)) / 255.0;
-                double totalColorDifferenceRatio = 1.0 - ((redRatio + greenRatio + blueRatio) / 3.0);
+                double totalColorDifferenceRatio = 1.0 - ((redRatio + greenRatio + blueRatio) / 3.00);
                 blueChance = blueChance > totalColorDifferenceRatio ? blueChance : totalColorDifferenceRatio;
             }
             if (redChance > blueChance)
@@ -74,7 +74,7 @@ namespace ColorDifferentiator
             }
 
            // return redChance > blueChance ? "red": "blue";
-            return "red: " + redChance + "blue: " + blueChance;
+            return "red: " + redChance.ToString() + ", blue: " + blueChance.ToString();
 
         }
 
