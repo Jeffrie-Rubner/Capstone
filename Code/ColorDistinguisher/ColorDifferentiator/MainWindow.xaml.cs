@@ -67,7 +67,7 @@ namespace ColorDifferentiator
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            colorDefiner.ClassifyColor(CurrentColorOfRectangle);
+            ResultText.Text = "Result: " + colorDefiner.ClassifyColor(CurrentColorOfRectangle);
         }
     }
 }

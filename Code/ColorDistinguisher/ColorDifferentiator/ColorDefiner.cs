@@ -30,12 +30,12 @@ namespace ColorDifferentiator
             redShades.Add(Color.FromRgb(200, 0, 0));
             redShades.Add(Color.FromRgb(255, 0, 130));
             redShades.Add(Color.FromRgb(200, 0, 70));
-            redShades.Add(Color.FromRgb(255, 40, 0));
-            redShades.Add(Color.FromRgb(200, 10, 0));
+            redShades.Add(Color.FromRgb(255, 100, 20));
+            redShades.Add(Color.FromRgb(200, 40, 5));
 
             blueShades.Add(Color.FromRgb(0, 0, 255));
             blueShades.Add(Color.FromRgb(0, 0, 200));
-            blueShades.Add(Color.FromRgb(0, 255, 255));
+            blueShades.Add(Color.FromRgb(0, 200, 255));
             blueShades.Add(Color.FromRgb(0, 150, 200));
             blueShades.Add(Color.FromRgb(15, 100, 255));
             blueShades.Add(Color.FromRgb(5, 150, 200));
@@ -50,18 +50,18 @@ namespace ColorDifferentiator
             double blueChance = 0.00;
             foreach (Color c in redShades)
             {
-                double redRatio = Math.Abs(c.R - input.R) / 255;
-                double greenRatio = Math.Abs(c.G - input.G) / 255;
-                double blueRatio = Math.Abs(c.B - input.B) / 255;
+                double redRatio = ((double)Math.Abs(c.R - input.R)) / 255;
+                double greenRatio = ((double)Math.Abs(c.G - input.G)) / 255;
+                double blueRatio = ((double)Math.Abs(c.B - input.B)) / 255;
                 double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio)/3);
                 redChance = redChance > totalColorDifferenceRatio ? redChance : totalColorDifferenceRatio;
             }
             foreach (Color c in blueShades)
             {
-                double redRatio = Math.Abs(c.R - input.R) / 255;
-                double greenRatio = Math.Abs(c.G - input.G) / 255;
-                double blueRatio = Math.Abs(c.B - input.B) / 255;
-                double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio) / 3);
+                double redRatio = ((double)Math.Abs(c.R - input.R)) / 255.0;
+                double greenRatio = ((double)Math.Abs(c.G - input.G)) / 255.0;
+                double blueRatio = ((double)Math.Abs(c.B - input.B)) / 255.0;
+                double totalColorDifferenceRatio = 1.0 - ((redRatio + greenRatio + blueRatio) / 3.0);
                 blueChance = blueChance > totalColorDifferenceRatio ? blueChance : totalColorDifferenceRatio;
             }
             if (redChance > blueChance)
@@ -73,7 +73,8 @@ namespace ColorDifferentiator
                 blueShades.Add(input);
             }
 
-            return redChance > blueChance ? "red" : "blue";
+           // return redChance > blueChance ? "red": "blue";
+            return "red: " + redChance + "blue: " + blueChance;
 
         }
 
