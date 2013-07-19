@@ -13,7 +13,6 @@ namespace ColorDifferentiator
     {
         #region Fields
         private Dictionary<String, List<Color>> AllColorsList;
-        private Dictionary<String, double> ColorProbabilityStorer;
         private List<Color> redShades = new List<Color>();
         private List<Color> blueShades = new List<Color>();
         #endregion  
@@ -22,7 +21,6 @@ namespace ColorDifferentiator
         public ColorDefiner()
         {
             AllColorsList = new Dictionary<string, List<Color>>();
-            ColorProbabilityStorer = new Dictionary<string, double>();
             redShades = new List<Color>();
             blueShades = new List<Color>();
             AllColorsList.Add("red", redShades);
@@ -52,6 +50,7 @@ namespace ColorDifferentiator
         //This method will be the machine learning method that determines what group a color belongs to
         public String ClassifyColor(Color input)
         {
+            Dictionary<String, double> ColorProbabilityStorer = new Dictionary<string, double>();
             foreach (List<Color> lists in AllColorsList.Values)
             {
                 double chance = new double();
@@ -64,41 +63,27 @@ namespace ColorDifferentiator
                     double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio) / 3.00);
                     chance = chance > totalColorDifferenceRatio ? chance : totalColorDifferenceRatio;
                 }
-                ColorProbabilityStorer.Add(AllColorsList.FirstOrDefault(x => x.Equals(lists)).Key, chance);
+                foreach (KeyValuePair<String, List<Color>> kv in AllColorsList)
+                {
+                    if (kv.Value.Equals(lists))
+                    {
+                        ColorProbabilityStorer.Add(kv.Key, chance);
+                    }            
+                }
             }
+            String returnString = "";
+            String largestKeyName = "";
+            double previousValue = 0.00;
+            foreach(KeyValuePair<String, double> kv in ColorProbabilityStorer)
+            {
+                returnString += kv.Key + ": " + kv.Value + ", ";
+                largestKeyName = previousValue > kv.Value ? largestKeyName : kv.Key;
+                previousValue = previousValue > kv.Value ? previousValue : kv.Value;
+            }
+            AllColorsList[largestKeyName].Add(input);
+            returnString = returnString.TrimEnd(",".ToCharArray());
 
-            #region commentedChunk
-            /*
-            foreach (Color c in redShades)
-            {
-                double redRatio = ((double)Math.Abs(c.R - input.R)) / 255;
-                double greenRatio = ((double)Math.Abs(c.G - input.G)) / 255;
-                double blueRatio = ((double)Math.Abs(c.B - input.B)) / 255;
-                double totalColorDifferenceRatio = 1 - ((redRatio + greenRatio + blueRatio)/3.00);
-                redChance = redChance > totalColorDifferenceRatio ? redChance : totalColorDifferenceRatio;
-            }
-            foreach (Color c in blueShades)
-            {
-                double redRatio = ((double)Math.Abs(c.R - input.R)) / 255.0;
-                double greenRatio = ((double)Math.Abs(c.G - input.G)) / 255.0;
-                double blueRatio = ((double)Math.Abs(c.B - input.B)) / 255.0;
-                double totalColorDifferenceRatio = 1.0 - ((redRatio + greenRatio + blueRatio) / 3.00);
-                blueChance = blueChance > totalColorDifferenceRatio ? blueChance : totalColorDifferenceRatio;
-            }
-            if (redChance > blueChance)
-            {
-                redShades.Add(input);
-            }
-            else
-            {
-                blueShades.Add(input);
-            }
-            
-           // return redChance > blueChance ? "red": "blue";
-            return "red: " + redChance.ToString() + ", blue: " + blueChance.ToString();
-           */
-            #endregion
-            return "method in progress";
+            return returnString;
 
         }
 
