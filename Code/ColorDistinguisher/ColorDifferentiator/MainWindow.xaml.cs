@@ -15,21 +15,25 @@ using System.Windows.Shapes;
 using System.Drawing;
 
 namespace ColorDifferentiator
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+{ 
     public partial class MainWindow : Window
     {
+
+        #region Fields
         private ColorDefiner colorDefiner;
         private Color CurrentColorOfRectangle;
+        #endregion
+
+        #region Constructor
         public MainWindow()
         {
             InitializeComponent();
             colorDefiner = new ColorDefiner();
             updateColorBox();
         }
+        #endregion
 
+        #region EventHandlerMethods
         private void Slider_OnMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -55,6 +59,13 @@ namespace ColorDifferentiator
             }
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ResultText.Text = "Result: " + colorDefiner.ClassifyColor(CurrentColorOfRectangle);
+        }
+        #endregion
+
+        #region HelperMethods
         private void updateColorBox()
         {
             byte redval = ((int)RedSlider.Value) > 255 ? (byte)255 : (byte)((int)RedSlider.Value);
@@ -63,11 +74,7 @@ namespace ColorDifferentiator
             CurrentColorOfRectangle = Color.FromRgb(redval, greenval, blueval);
             ColorChosen.Fill = new SolidColorBrush(CurrentColorOfRectangle);
         }
+        #endregion
 
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            ResultText.Text = "Result: " + colorDefiner.ClassifyColor(CurrentColorOfRectangle);
-        }
     }
 }

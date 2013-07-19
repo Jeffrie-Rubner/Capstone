@@ -11,6 +11,7 @@ namespace ColorDifferentiator
 
     class ColorDefiner
     {
+
         #region Fields
         private Dictionary<String, List<Color>> AllColorsList;
         private List<Color> redShades = new List<Color>();
@@ -29,6 +30,7 @@ namespace ColorDifferentiator
         }
         #endregion
 
+        #region PrivateMethods
         private void InitializeColorLists()
         {
             redShades.Add(Color.FromRgb(255, 0, 0));
@@ -45,9 +47,9 @@ namespace ColorDifferentiator
             blueShades.Add(Color.FromRgb(0, 100, 255));
             blueShades.Add(Color.FromRgb(5, 40, 200));
         }
+        #endregion
 
-
-        //This method will be the machine learning method that determines what group a color belongs to
+        #region PublicMethods
         public String ClassifyColor(Color input)
         {
             Dictionary<String, double> ColorProbabilityStorer = new Dictionary<string, double>();
@@ -86,6 +88,7 @@ namespace ColorDifferentiator
             return returnString;
 
         }
+        #endregion
 
     }
 }
