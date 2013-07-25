@@ -1,6 +1,16 @@
+(** denotes completion)
+
 Week 1
 ------
-Write a machine learning program
-The program will be able to differentiate colors
-It will determine if a color is red or blue
-The program will give a percentage chance for it to be a certain color
+**Write a machine learning program
+**The program will be able to differentiate colors
+**It will determine if a color is red or blue
+**The program will give a percentage chance for it to be a certain color
+
+Week 2
+------
+Write Proposal
+Create a program that will analyze paintings
+Paintings will then be compared by 1 metric
+Determine which artists will be used for testing
+Determine first metric

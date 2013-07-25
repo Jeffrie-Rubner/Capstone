@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+/*
+ * This Class measures the average color of an image
+ * Will represent the 
+ */
+namespace ArtDentifier
+{
+    class ColorScaleAspectDeterminer
+    {
+        private Color meanColorValue;
+
+        public ColorScaleAspectDeterminer()
+        {
+            
+        }
+
+        public Color determineBitMean(BitmapImage bitmap)
+        {
+            Color mean;
+            byte[] pixels = ConvertBitmapImageToByteArray(bitmap);
+            int stride = bitmap.PixelWidth * 4;
+            int meanR = 0;
+            int meanG = 0;
+            int meanB = 0;
+            int meanA = 0;
+            for (int x = 0; x < bitmap.Width; x++)
+            {
+                for (int y = 0; y < bitmap.Height; y++)
+                {
+                    int index = (y * stride) + (4 * x);
+                    meanR += pixels[index];
+                    meanG += pixels[index + 1];
+                    meanB += pixels[index + 2];
+                    meanA += pixels[index + 3];
+                }
+            }
+            meanR = (int)(meanR / (bitmap.Width * bitmap.Height));
+            meanG = (int)(meanG / (bitmap.Width * bitmap.Height));
+            meanB = (int)(meanB / (bitmap.Width * bitmap.Height));
+            meanA = (int)(meanA / (bitmap.Width * bitmap.Height));
+
+            mean = Color.FromArgb((byte)meanA, (byte)meanR, (byte)meanG, (byte)meanB);
+
+            return mean;
+        }
+
+        private byte[] ConvertBitmapImageToByteArray(BitmapImage bitmap)
+        {
+            int stride = bitmap.PixelWidth * 4;
+            int size = bitmap.PixelHeight * stride;
+            byte[] pixels = new byte[size];
+            bitmap.CopyPixels(pixels, stride, 0);
+            return pixels;
+        }
+    }
+}
