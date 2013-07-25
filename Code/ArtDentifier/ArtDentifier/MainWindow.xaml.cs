@@ -21,10 +21,15 @@ namespace ArtDentifier
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Fields
+        private ArtistDistinguisher artdentifier;
+        #endregion
+
         #region Constructor
         public MainWindow()
         {
             InitializeComponent();
+            artdentifier = new ArtistDistinguisher();
         }
         #endregion
 
@@ -53,7 +58,7 @@ namespace ArtDentifier
         {
             if (ImagePreview.Source != null)
             {
-                //insert send to machine learning class here
+                artdentifier.AnalyzePicture((BitmapImage)ImagePreview.Source);
             }
             else
             {

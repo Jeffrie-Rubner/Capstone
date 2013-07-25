@@ -12,5 +12,5 @@ Week 2
 Write Proposal
 Create a program that will analyze paintings
 Paintings will then be compared by 1 metric
-Determine which artists will be used for testing
-Determine first metric
+**Determine which artists will be used for testing
+**Determine first metric
