@@ -21,17 +21,21 @@ namespace ArtDentifier
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Constructor
         public MainWindow()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region ButtonEvents
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFD = new OpenFileDialog();
             openFD.Filter = "Image Files (*.jpg, *.bmp, *.gif, *.png, *.jpeg)" +
                 "|*.jpg;*.bmp;*.gif;*.png;*.jpeg";
             string fileName;
+            //error here if window is exited without image selected
             if (openFD.ShowDialog() != DialogResult)
             {
                 fileName = openFD.FileName;
@@ -44,6 +48,19 @@ namespace ArtDentifier
                 ImagePreview.Source = myBitmapImage;
             }
         }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            if (ImagePreview.Source != null)
+            {
+                //insert send to machine learning class here
+            }
+            else
+            {
+                ResultBox.Text = "You Must Put In an image";
+            }
+        }
+        #endregion
 
     }
 }

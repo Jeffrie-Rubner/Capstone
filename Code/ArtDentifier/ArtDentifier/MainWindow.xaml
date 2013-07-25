@@ -1,12 +1,17 @@
 ﻿<Window x:Class="ArtDentifier.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="425" Width="500">
+        Title="MainWindow" Height="475" Width="550">
     <Grid>
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="250">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Width="250" Height="250">
             <Button Content="Browse" Height="32" HorizontalAlignment="Center" 
     			x:Name="button1" VerticalAlignment="Bottom" Width="250" Click="button1_Click"/>
                 <Image Name="ImagePreview" Margin="0,0,0,32"/>
+        </Grid>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Height="250">
+            <TextBlock Name="ResultBox"  HorizontalAlignment="Left" Height="218" TextWrapping="Wrap" Text="Artist results will appear here" VerticalAlignment="Top" Width="229"/>
+            <Button Content="Submit" Height="32" HorizontalAlignment="Center" 
+        		x:Name="ImageSubmitter" VerticalAlignment="Bottom" Width="230" Click="button2_Click"/>
         </Grid>
     </Grid>
 </Window>

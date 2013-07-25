@@ -6,20 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 /*
- * This Class measures the average color of an image
- * Will represent the 
+ * This Class measures the average color of a bitmapimage
  */
 namespace ArtDentifier
 {
     class ColorScaleAspectDeterminer
     {
-        private Color meanColorValue;
-
-        public ColorScaleAspectDeterminer()
-        {
-            
-        }
-
+        #region PublicMethods
         public Color determineBitMean(BitmapImage bitmap)
         {
             Color mean;
@@ -49,7 +42,9 @@ namespace ArtDentifier
 
             return mean;
         }
+        #endregion
 
+        #region PrivateMethods
         private byte[] ConvertBitmapImageToByteArray(BitmapImage bitmap)
         {
             int stride = bitmap.PixelWidth * 4;
@@ -58,5 +53,6 @@ namespace ArtDentifier
             bitmap.CopyPixels(pixels, stride, 0);
             return pixels;
         }
+        #endregion
     }
 }
