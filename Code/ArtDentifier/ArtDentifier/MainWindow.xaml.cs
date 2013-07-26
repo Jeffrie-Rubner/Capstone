@@ -44,12 +44,7 @@ namespace ArtDentifier
             if (openFD.ShowDialog() != DialogResult)
             {
                 fileName = openFD.FileName;
-                BitmapImage myBitmapImage = new BitmapImage();
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(@"" + openFD.FileName);
-                myBitmapImage.DecodePixelWidth = 250;
-                myBitmapImage.DecodePixelHeight = 250;
-                myBitmapImage.EndInit();
+                BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(new Uri(@"" + openFD.FileName));
                 ImagePreview.Source = myBitmapImage;
             }
         }
