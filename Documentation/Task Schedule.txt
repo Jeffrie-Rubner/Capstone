@@ -13,4 +13,8 @@ Write Proposal
 Create a program that will analyze paintings
 Paintings will then be compared by 1 metric
 **Determine which artists will be used for testing
+**Save Sample Images For Each artist
+Read Sample Images into program
 **Determine first metric
+**Develop Method To measure first metric
+Develop Method to compare the first metric on multiple images
