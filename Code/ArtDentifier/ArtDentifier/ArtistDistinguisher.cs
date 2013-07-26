@@ -28,15 +28,38 @@ namespace ArtDentifier
 
         public void AnalyzePicture(BitmapImage bitmap)
         {
-           //create a method that allows images to be compared to each artists image on every metric
-            Color c = colorSAD.determineBitMean(bitmap);
+           //method that compares the first metric
+           testColorScaleAspect(bitmap);
+        }
+
+        #region Metric Measuring Methods
+        private void testColorScaleAspect(BitmapImage bitmap)
+        {
+            //needs to compare the 4 aspects of color
+            Color inputColor = colorSAD.determineBitMean(bitmap);
+            byte inputAlphaValue = inputColor.A;
+            byte inputRedValue = inputColor.R;
+            byte inputGreenValue = inputColor.G;
+            byte inputBlueValue = inputColor.B;
+            double greatestColorMeanRatio = 0.00;
             foreach (KeyValuePair<String, List<BitmapImage>> kvp in allArtists)
             {
+                foreach (BitmapImage bitmapI in kvp.Value)
+                {
+                    Color imageColor = colorSAD.determineBitMean(bitmapI);
+                    byte imageAlphaValue = imageColor.A;
+                    byte imageRedValue = imageColor.R;
+                    byte imageGreenValue = imageColor.G;
+                    byte imageBlueValue = imageColor.B;
+                    double imageMean = (((double)imageAlphaValue / inputAlphaValue) + ((double)imageRedValue / inputRedValue)
+                        + ((double)imageGreenValue / inputGreenValue) + ((double)imageBlueValue / inputBlueValue)) / 4.00;
+                    greatestColorMeanRatio = greatestColorMeanRatio > imageMean ? greatestColorMeanRatio : imageMean;
+                }
+
 
             }
         }
-        
-
+        #endregion
 
         #region InitializationMethods
         private void AddArtistsToDictionary()
