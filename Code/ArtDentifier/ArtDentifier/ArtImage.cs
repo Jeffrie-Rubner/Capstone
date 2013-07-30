@@ -13,13 +13,14 @@ namespace ArtDentifier
         private BitmapImage ActualImage;
         double Width;
         double Height;
-        Dictionary<Color, int> ColorOccurenceCounter = new Dictionary<Color, int>();
+        ColorDictionary ColorOccurenceCounter = new ColorDictionary();
 
-
+        #region Constructor
         public ArtImage(BitmapImage bitmapImage)
         {
-
+            ActualImage = bitmapImage;
         }
+        #endregion
 
         public BitmapImage getBitmapImage()
         {
@@ -28,14 +29,7 @@ namespace ArtDentifier
 
         public void countColor(Color color)
         {
-            if (ColorOccurenceCounter.ContainsKey(color))
-            {
-
-            }
-            else
-            {
-                ColorOccurenceCounter
-            }
+            ColorOccurenceCounter.addColor(color);
         }
     }
 }

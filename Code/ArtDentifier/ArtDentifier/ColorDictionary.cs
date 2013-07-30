@@ -5,19 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
+//contains methods to interact with colors
 namespace ArtDentifier
 {
     class ColorDictionary
     {
+        #region Fields
         private Color[] Colors;
         private int[] CountValue;
         private int listSize = 0;
+        #endregion
 
+        #region Constructor
         public ColorDictionary()
         {
             Colors = new Color[10];
             CountValue = new int[10];
         }
+        #endregion
 
         public void addColor(Color color)
         {
@@ -46,6 +51,18 @@ namespace ArtDentifier
             listSize++;
         }
 
+        #region Getters
+        public Color getMostFrequentColor()
+        {
+            return Colors[getIndexOfGreatestFrequency()];
+        }
+
+        public int getGreatestFrequency()
+        {
+            return CountValue[getIndexOfGreatestFrequency()];
+        }
+        #endregion
+
         public bool isSameColor(Color color1, Color color2)
         {
             bool isSame = false;
@@ -64,5 +81,20 @@ namespace ArtDentifier
             }
             return isSame;
         }
+
+        #region Private Methods
+        private int getIndexOfGreatestFrequency()
+        {
+            int indexOfMax = 0;
+            for (int i = 1; i < listSize; i++)
+            {
+                if (CountValue[i] > CountValue[indexOfMax])
+                {
+                    indexOfMax = i;
+                }
+            }
+            return indexOfMax;
+        }
+        #endregion
     }
 }
