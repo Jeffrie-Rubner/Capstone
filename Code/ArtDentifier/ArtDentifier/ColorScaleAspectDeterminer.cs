@@ -13,10 +13,10 @@ namespace ArtDentifier
     class ColorScaleAspectDeterminer
     {
         #region PublicMethods
-        public Color determineBitMean(BitmapImage bitmap)
+        public Color determineBitMean(ArtImage bitmap)
         {
             Color mean;
-            byte[] pixels = ConvertBitmapImageToByteArray(bitmap);
+            byte[] pixels = ConvertBitmapImageToByteArray(bitmap.getBitmapImage());
             int stride = bitmap.PixelWidth * 4;
             int meanR = 0;
             int meanG = 0;
@@ -33,10 +33,6 @@ namespace ArtDentifier
                     meanA += pixels[index + 3];
                 }
             }
-            meanR = (int)(meanR / (bitmap.Width * bitmap.Height));
-            meanG = (int)(meanG / (bitmap.Width * bitmap.Height));
-            meanB = (int)(meanB / (bitmap.Width * bitmap.Height));
-            meanA = (int)(meanA / (bitmap.Width * bitmap.Height));
 
             mean = Color.FromArgb((byte)meanA, (byte)meanR, (byte)meanG, (byte)meanB);
 

@@ -14,8 +14,6 @@ namespace ArtDentifier
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
             myBitmapImage.UriSource = uri;
-            myBitmapImage.DecodePixelWidth = 500;
-            myBitmapImage.DecodePixelHeight = 500;
             myBitmapImage.EndInit();
             return myBitmapImage;
         }
