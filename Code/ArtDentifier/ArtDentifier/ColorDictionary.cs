@@ -28,7 +28,7 @@ namespace ArtDentifier
         {
             for(int i = 0; i < listSize; i++)
             {
-                if (isSameColor(Colors[i], color))
+                if (ColorComparitor.Compare(Colors[i], color))
                 {
                     CountValue[i]++;
                     return;
@@ -62,25 +62,6 @@ namespace ArtDentifier
             return CountValue[getIndexOfGreatestFrequency()];
         }
         #endregion
-
-        public bool isSameColor(Color color1, Color color2)
-        {
-            bool isSame = false;
-            if (color1.A == color2.A)
-            {
-                if (color1.R == color2.R)
-                {
-                    if (color1.G == color2.G)
-                    {
-                        if (color1.B == color2.B)
-                        {
-                            isSame = true;
-                        }
-                    }
-                }
-            }
-            return isSame;
-        }
 
         #region Private Methods
         private int getIndexOfGreatestFrequency()
