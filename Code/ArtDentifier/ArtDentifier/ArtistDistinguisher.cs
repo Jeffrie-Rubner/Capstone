@@ -27,17 +27,25 @@ namespace ArtDentifier
           InitializeArtists();
         }
 
-        public void AnalyzePicture(BitmapImage bitmap)
+        public void AnalyzePicture(BitmapImage bitmapImage)
         {
+            ArtImage artImage = new ArtImage(bitmapImage);
            //method that compares the first metric
-           testColorScaleAspect(bitmap);
+           testColorScaleAspect(artImage);
         }
 
         #region Metric Measuring Methods
-        private void testColorScaleAspect(BitmapImage bitmap)
+        //related to ColorScaleAspectDeterminer class
+        private void testColorScaleAspect(ArtImage artImage)
         {
 
         }
+        //related to DimensionAnalyzer
+        private void testDimensionAspect(ArtImage artImage)
+        {
+
+        }
+
         #endregion
 
         #region InitializationMethods

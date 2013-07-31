@@ -40,12 +40,18 @@ namespace ArtDentifier
             openFD.Filter = "Image Files (*.jpg, *.bmp, *.gif, *.png, *.jpeg)" +
                 "|*.jpg;*.bmp;*.gif;*.png;*.jpeg";
             string fileName;
-            //error here if window is exited without image selected
             if (openFD.ShowDialog() != DialogResult)
             {
-                fileName = openFD.FileName;
-                BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(new Uri(@"" + openFD.FileName));
-                ImagePreview.Source = myBitmapImage;
+                try
+                {
+                    fileName = openFD.FileName;
+                    BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(new Uri(@"" + openFD.FileName));
+                    ImagePreview.Source = myBitmapImage;
+                }
+                catch (UriFormatException exception)
+                {
+                    //do nothing
+                }
             }
         }
 

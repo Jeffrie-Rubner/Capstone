@@ -11,8 +11,10 @@ namespace ArtDentifier
     class ArtImage
     {
         private BitmapImage ActualImage;
-        double Width;
-        double Height;
+        private double width;
+        public double Width {get{return width;}, private set{width = value;}}
+        private double height;
+        public double Height {get{return height;} private set{height = value;}}
         ColorDictionary ColorOccurenceCounter;
 
         #region Constructor
@@ -20,6 +22,8 @@ namespace ArtDentifier
         {
             ColorOccurenceCounter = new ColorDictionary();
             ActualImage = bitmapImage;
+            Width = ActualImage.PixelWidth;
+            Height = ActualImage.PixelHeight;
         }
         #endregion
 
