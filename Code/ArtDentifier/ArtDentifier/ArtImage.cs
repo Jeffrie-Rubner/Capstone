@@ -13,11 +13,12 @@ namespace ArtDentifier
         private BitmapImage ActualImage;
         double Width;
         double Height;
-        ColorDictionary ColorOccurenceCounter = new ColorDictionary();
+        ColorDictionary ColorOccurenceCounter;
 
         #region Constructor
         public ArtImage(BitmapImage bitmapImage)
         {
+            ColorOccurenceCounter = new ColorDictionary();
             ActualImage = bitmapImage;
         }
         #endregion

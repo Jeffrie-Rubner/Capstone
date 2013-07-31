@@ -34,18 +34,7 @@ namespace ArtDentifier
                     return;
                 }
             }
-            if (listSize < Colors.Length)
-            {
-                Color[] tempColors = new Color[Colors.Length * 2];
-                int[] tempCounts = new int[CountValue.Length * 2];
-                for (int j = 0; j < listSize; j++)
-                {
-                    tempColors[j] = Colors[j];
-                    tempCounts[j] = CountValue[j];
-                }
-                Colors = tempColors;
-                CountValue = tempCounts;
-            }
+            checkSize();
             Colors[listSize] = color;
             CountValue[listSize] = 0;
             listSize++;
@@ -64,6 +53,22 @@ namespace ArtDentifier
         #endregion
 
         #region Private Methods
+        private void checkSize()
+        {
+            if (listSize > Colors.Length)
+            {
+                Color[] tempColors = new Color[Colors.Length * 2];
+                int[] tempCounts = new int[CountValue.Length * 2];
+                for (int j = 0; j < listSize; j++)
+                {
+                    tempColors[j] = Colors[j];
+                    tempCounts[j] = CountValue[j];
+                }
+                Colors = tempColors;
+                CountValue = tempCounts;
+            }
+        }
+
         private int getIndexOfGreatestFrequency()
         {
             int indexOfMax = 0;

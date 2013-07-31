@@ -14,6 +14,7 @@ namespace ArtDentifier
     class ColorScaleAspectDeterminer
     {
         #region PublicMethods
+        //checks every pixel in an artImage, and counts each time a specific color occurs
         public void determineBitFrequency(ArtImage artImage)
         {
             BitmapImage bitmap = artImage.getBitmapImage();

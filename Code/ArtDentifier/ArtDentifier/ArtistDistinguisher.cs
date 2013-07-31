@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,18 +13,18 @@ namespace ArtDentifier
 {
     class ArtistDistinguisher
     {
-        private Dictionary<String, List<BitmapImage>> allArtists = new Dictionary<string, List<BitmapImage>>();
-        private List<BitmapImage> PicassoPieces = new List<BitmapImage>();
-        private List<BitmapImage> MonetPieces = new List<BitmapImage>();
-        private List<BitmapImage> RaphaelPieces = new List<BitmapImage>();
-        private List<BitmapImage> BlakePieces = new List<BitmapImage>();
-        private List<BitmapImage> VanGoghPieces = new List<BitmapImage>();
+        private Dictionary<String, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
+        private List<ArtImage> PicassoPieces = new List<ArtImage>();
+        private List<ArtImage> MonetPieces = new List<ArtImage>();
+        private List<ArtImage> RaphaelPieces = new List<ArtImage>();
+        private List<ArtImage> BlakePieces = new List<ArtImage>();
+        private List<ArtImage> VanGoghPieces = new List<ArtImage>();
         private ColorScaleAspectDeterminer colorSAD = new ColorScaleAspectDeterminer();
 
         public ArtistDistinguisher()
         {
           AddArtistsToDictionary();
-         //   InitializeArtists();
+         //InitializeArtists();
         }
 
         public void AnalyzePicture(BitmapImage bitmap)
@@ -50,11 +51,11 @@ namespace ArtDentifier
         }
         private void InitializeArtists()
         {
-            foreach (KeyValuePair<String, List<BitmapImage>> kvp in allArtists)
+            foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
             {
                 Uri artistLocation = new Uri(@"/TeachingImages/" + kvp.Key);
-
-                //kvp.Value.Add(new BitmapImage());    
+                string[] filePaths = Directory.GetFiles(@"/TeachingImages/" + kvp.Key);
+                //kvp.Value.Add(new ArtImage());    
             }
         }
         #endregion
