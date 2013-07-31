@@ -24,7 +24,7 @@ namespace ArtDentifier
         public ArtistDistinguisher()
         {
           AddArtistsToDictionary();
-         //InitializeArtists();
+          InitializeArtists();
         }
 
         public void AnalyzePicture(BitmapImage bitmap)
@@ -53,9 +53,22 @@ namespace ArtDentifier
         {
             foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
             {
-                Uri artistLocation = new Uri(@"/TeachingImages/" + kvp.Key);
-                string[] filePaths = Directory.GetFiles(@"/TeachingImages/" + kvp.Key);
-                //kvp.Value.Add(new ArtImage());    
+                string dir = @"c:\Users\Jeff\Documents\GitHub\Capstone\Documentation\Misc\TeachingImages\" + kvp.Key;
+                string[] filePaths = Directory.GetFiles(dir);
+                foreach (string str in filePaths)
+                {
+                    Uri artistLocation = new Uri(str);
+                    try
+                    {
+                        BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(artistLocation);
+                        kvp.Value.Add(new ArtImage(myBitmapImage));
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.StackTrace);
+                    }
+                       
+                }
             }
         }
         #endregion
