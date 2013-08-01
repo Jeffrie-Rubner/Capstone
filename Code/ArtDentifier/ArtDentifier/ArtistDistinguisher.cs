@@ -35,7 +35,7 @@ namespace ArtDentifier
             //method that compares first metric
             testDimensionAspect(artImage);
             //method that compares the second metric
-            testColorScaleAspect(artImage);
+        //    testColorScaleAspect(artImage);
             return new string[] { "first", "second" };
         }
 
@@ -44,13 +44,30 @@ namespace ArtDentifier
         private void testColorScaleAspect(ArtImage artImage)
         {
             colorSAD.determineBitFrequency(artImage);
+
         }
         //related to DimensionAnalyzer
         private void testDimensionAspect(ArtImage artImage)
         {
-            dimensionAnalyzer.doesSomethingWithWidthHeight(artImage);
-        }
+            double dimensionalRatio = dimensionAnalyzer.getDimensionRatio(artImage);
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double dimensionalSimilarity = 0.00;
+                foreach (ArtImage a in lists)
+                {
+                    double currentImageRatio = dimensionAnalyzer.getDimensionRatio(a);
+                    double tempSimilarity = 1 - Math.Abs(dimensionalRatio - currentImageRatio);
+                    dimensionalSimilarity = tempSimilarity > dimensionalSimilarity ? tempSimilarity : dimensionalSimilarity;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if(kvp.Value.Equals(lists))
+                    {
 
+                    }
+                }
+            }
+        }
         #endregion
 
         #region InitializationMethods

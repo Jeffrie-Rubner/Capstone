@@ -8,10 +8,10 @@ namespace ArtDentifier
 {
     class DimensionAnalyzer
     {
-        public void doesSomethingWithWidthHeight(ArtImage artImage)
+        public double getDimensionRatio(ArtImage artImage)
         {
             double widthHeightRatio = (double)artImage.Width / artImage.Height;
-
+            return widthHeightRatio;
         }
     }
 }
