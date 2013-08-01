@@ -8,14 +8,14 @@
     			x:Name="button1" VerticalAlignment="Bottom" Width="260" Click="button1_Click" Margin="0,0,0,10"/>
                 <Image Name="ImagePreview" Margin="0,0,0,42"/>
         </Grid>
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Height="265" Margin="0,98,2,98" Width="305">
+            <Grid Name ="AllResultsGrid" VerticalAlignment="Center" HorizontalAlignment="Right" Height="265" Margin="0,98,2,98" Width="355">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="74*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="24*"/>
@@ -35,6 +35,39 @@
             <TextBlock Name="Artist4" HorizontalAlignment="Left" Margin="0,26.4,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="91" Grid.Row="3"/>
             <TextBlock Name="Artist5" HorizontalAlignment="Left" Margin="0,26.2,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="91" Grid.Row="4"/>
             <TextBlock Name="ArtistHeader" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="91"/>
+            <TextBlock Name="Column1Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="43"/>
+            <TextBlock Name="Column2Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="2" Height="26" Width="43"/>
+            <TextBlock Name="Column3Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="3" Height="26" Width="43"/>
+            <TextBlock Name="Column4Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="43"/>
+            <TextBlock Name="Column5Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="5" Height="26" Width="43"/>
+            
+            <TextBlock Name="Column1Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="1" Height="26" Width="43" />
+            <TextBlock Name="Column1Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="1" Height="26" Width="43" />
+            <TextBlock Name="Column1Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="1" Height="26" Width="43"/>
+            <TextBlock Name="Column1Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="1" Height="26" Width="43"/>
+            <TextBlock Name="Column1Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="1" Height="26" Width="43" />
+            <TextBlock Name="Column2Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="2" Height="26" Width="43" />
+            <TextBlock Name="Column2Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="2" Height="26" Width="43" />
+            <TextBlock Name="Column2Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="2" Height="26" Width="43"/>
+            <TextBlock Name="Column2Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="2" Height="26" Width="43"/>
+            <TextBlock Name="Column2Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="2" Height="26" Width="43" />
+            <TextBlock Name="Column3Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="3" Height="26" Width="43" />
+            <TextBlock Name="Column3Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="3" Height="26" Width="43" />
+            <TextBlock Name="Column3Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="3" Height="26" Width="43"/>
+            <TextBlock Name="Column3Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="3" Height="26" Width="43"/>
+            <TextBlock Name="Column3Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="3" Height="26" Width="43" />    
+            <TextBlock Name="Column4Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="4" Height="26" Width="43" />
+            <TextBlock Name="Column4Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="4" Height="26" Width="43" />
+            <TextBlock Name="Column4Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="4" Height="26" Width="43"/>
+            <TextBlock Name="Column4Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="4" Height="26" Width="43"/>
+            <TextBlock Name="Column4Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="4" Height="26" Width="43" />
+            
+            <TextBlock Name="Column5Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="5" Height="26" Width="43" />
+            <TextBlock Name="Column5Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="5" Height="26" Width="43" />
+            <TextBlock Name="Column5Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="5" Height="26" Width="43"/>
+            <TextBlock Name="Column5Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="5" Height="26" Width="43"/>
+            <TextBlock Name="Column5Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="5" Height="26" Width="43" />
+            
         </Grid>
     </Grid>
 </Window>

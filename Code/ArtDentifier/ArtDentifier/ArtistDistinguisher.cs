@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,9 +34,9 @@ namespace ArtDentifier
             ArtImage artImage = new ArtImage(bitmapImage);
             //method that compares first metric
             testDimensionAspect(artImage);
-           //method that compares the second metric
-           testColorScaleAspect(artImage);
-            return new string[] {"first", "second"};
+            //method that compares the second metric
+            testColorScaleAspect(artImage);
+            return new string[] { "first", "second" };
         }
 
         #region Metric Measuring Methods
@@ -65,20 +66,27 @@ namespace ArtDentifier
         {
             foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
             {
-                string dir = @"c:\Users\Jeff\Documents\GitHub\Capstone\Documentation\Misc\TeachingImages\" + kvp.Key;
-                string[] filePaths = Directory.GetFiles(dir);
-                foreach (string str in filePaths)
+                Thread t = new Thread(new ParameterizedThreadStart(this.ImageGrabMethod));
+                t.Start(kvp);
+            }
+        }
+
+        private void ImageGrabMethod(object obj)
+        {
+            KeyValuePair<String, List<ArtImage>> kvp = (KeyValuePair<String, List<ArtImage>>)obj;
+            string dir = @"c:\Users\Jeff\Documents\GitHub\Capstone\Documentation\Misc\TeachingImages\" + kvp.Key;
+            string[] filePaths = Directory.GetFiles(dir);
+            foreach (string str in filePaths)
+            {
+                Uri artistLocation = new Uri(str);
+                try
                 {
-                    Uri artistLocation = new Uri(str);
-                    try
-                    {
-                        BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(artistLocation);
-                        kvp.Value.Add(new ArtImage(myBitmapImage));
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.StackTrace);
-                    }
+                    BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(artistLocation);
+                    kvp.Value.Add(new ArtImage(myBitmapImage));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
         }

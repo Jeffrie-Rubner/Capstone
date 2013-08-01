@@ -22,7 +22,11 @@ namespace ArtDentifier
     public partial class MainWindow : Window
     {
         #region Fields
+        private readonly int COUNT_OF_TOP_ARTISTS_SHOWN = 5;
+        private readonly int METRICS_MESURED_ON = 6;
         private ArtistDistinguisher artdentifier;
+        private string[,] artistChanceValues;
+        private TextBlock[,] resultGrid;
         #endregion
 
         #region Constructor
@@ -30,6 +34,9 @@ namespace ArtDentifier
         {
             InitializeComponent();
             artdentifier = new ArtistDistinguisher();
+            artistChanceValues = new string[COUNT_OF_TOP_ARTISTS_SHOWN, METRICS_MESURED_ON];
+            resultGrid = new TextBlock[COUNT_OF_TOP_ARTISTS_SHOWN, METRICS_MESURED_ON];
+            fillResultGrid();
         }
         #endregion
 
@@ -62,6 +69,19 @@ namespace ArtDentifier
                 string[] results = artdentifier.AnalyzePicture((BitmapImage)ImagePreview.Source);
                 ResultBox.Text = "";
                 ArtistHeader.Text = "Artist Names";
+                Column1Header.Text = "Dimensions";
+                Column2Header.Text = "Colors";
+                for (int i = 0; i < results.Length; i++)
+                {
+                    artistChanceValues[i / 6, i % 6] = results[i];
+                }
+                for (int j = 0; j < COUNT_OF_TOP_ARTISTS_SHOWN; j++)
+                {
+                    for (int k = 0; k < METRICS_MESURED_ON; k++)
+                    {
+                        resultGrid[j, k].Text = artistChanceValues[j, k];
+                    }
+                }
             }
             else
             {
@@ -70,5 +90,45 @@ namespace ArtDentifier
         }
         #endregion
 
+        #region Initialization Methods
+        private void fillResultGrid()
+        {
+            resultGrid[0, 0] = Artist1;
+            resultGrid[1, 0] = Artist2;
+            resultGrid[2, 0] = Artist3;
+            resultGrid[3, 0] = Artist4;
+            resultGrid[4, 0] = Artist5;
+
+            resultGrid[0, 1] = Column1Row1;
+            resultGrid[1, 1] = Column1Row2;
+            resultGrid[2, 1] = Column1Row3;
+            resultGrid[3, 1] = Column1Row4;
+            resultGrid[4, 1] = Column1Row5;
+
+            resultGrid[0, 2] = Column2Row1;
+            resultGrid[1, 2] = Column2Row2;
+            resultGrid[2, 2] = Column2Row3;
+            resultGrid[3, 2] = Column2Row4;
+            resultGrid[4, 2] = Column2Row5;
+
+            resultGrid[0, 3] = Column3Row1;
+            resultGrid[1, 3] = Column3Row2;
+            resultGrid[2, 3] = Column3Row3;
+            resultGrid[3, 3] = Column3Row4;
+            resultGrid[4, 3] = Column3Row5;
+
+            resultGrid[0, 4] = Column4Row1;
+            resultGrid[1, 4] = Column4Row2;
+            resultGrid[2, 4] = Column4Row3;
+            resultGrid[3, 4] = Column4Row4;
+            resultGrid[4, 4] = Column4Row5;
+
+            resultGrid[0, 5] = Column5Row1;
+            resultGrid[1, 5] = Column5Row2;
+            resultGrid[2, 5] = Column5Row3;
+            resultGrid[3, 5] = Column5Row4;
+            resultGrid[4, 5] = Column5Row5;
+        }
+        #endregion
     }
 }
