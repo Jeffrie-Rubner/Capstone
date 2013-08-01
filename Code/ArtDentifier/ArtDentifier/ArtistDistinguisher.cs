@@ -20,17 +20,21 @@ namespace ArtDentifier
         private List<ArtImage> BlakePieces = new List<ArtImage>();
         private List<ArtImage> VanGoghPieces = new List<ArtImage>();
         private ColorScaleAspectDeterminer colorSAD = new ColorScaleAspectDeterminer();
+        private DimensionAnalyzer dimensionAnalyzer = new DimensionAnalyzer();
 
         public ArtistDistinguisher()
         {
-          AddArtistsToDictionary();
-          InitializeArtists();
+            AddArtistsToDictionary();
+            InitializeArtists();
         }
 
         public void AnalyzePicture(BitmapImage bitmapImage)
         {
             ArtImage artImage = new ArtImage(bitmapImage);
-           //method that compares the first metric
+
+            //method that compares first metric
+            testDimensionAspect(artImage);
+           //method that compares the second metric
            testColorScaleAspect(artImage);
         }
 
@@ -38,7 +42,7 @@ namespace ArtDentifier
         //related to ColorScaleAspectDeterminer class
         private void testColorScaleAspect(ArtImage artImage)
         {
-
+            colorSAD.determineBitFrequency(artImage);
         }
         //related to DimensionAnalyzer
         private void testDimensionAspect(ArtImage artImage)
@@ -75,7 +79,7 @@ namespace ArtDentifier
                     {
                         Console.WriteLine(e.StackTrace);
                     }
-                       
+
                 }
             }
         }
