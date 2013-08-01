@@ -12,7 +12,7 @@ namespace ArtDentifier
     {
         private BitmapImage ActualImage;
         private double width;
-        public double Width {get{return width;}, private set{width = value;}}
+        public double Width {get{return width;} private set{width = value;}}
         private double height;
         public double Height {get{return height;} private set{height = value;}}
         ColorDictionary ColorOccurenceCounter;

@@ -28,14 +28,14 @@ namespace ArtDentifier
             InitializeArtists();
         }
 
-        public void AnalyzePicture(BitmapImage bitmapImage)
+        public string[] AnalyzePicture(BitmapImage bitmapImage)
         {
             ArtImage artImage = new ArtImage(bitmapImage);
-
             //method that compares first metric
             testDimensionAspect(artImage);
            //method that compares the second metric
            testColorScaleAspect(artImage);
+            return new string[] {"first", "second"};
         }
 
         #region Metric Measuring Methods
@@ -47,7 +47,7 @@ namespace ArtDentifier
         //related to DimensionAnalyzer
         private void testDimensionAspect(ArtImage artImage)
         {
-
+            dimensionAnalyzer.doesSomethingWithWidthHeight(artImage);
         }
 
         #endregion
@@ -79,7 +79,6 @@ namespace ArtDentifier
                     {
                         Console.WriteLine(e.StackTrace);
                     }
-
                 }
             }
         }

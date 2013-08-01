@@ -55,7 +55,7 @@ namespace ArtDentifier
         #region Private Methods
         private void checkSize()
         {
-            if (listSize > Colors.Length)
+            if (listSize >= Colors.Length)
             {
                 Color[] tempColors = new Color[Colors.Length * 2];
                 int[] tempCounts = new int[CountValue.Length * 2];

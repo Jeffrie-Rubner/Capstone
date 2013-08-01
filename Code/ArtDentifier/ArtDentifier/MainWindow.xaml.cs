@@ -59,7 +59,9 @@ namespace ArtDentifier
         {
             if (ImagePreview.Source != null)
             {
-                artdentifier.AnalyzePicture((BitmapImage)ImagePreview.Source);
+                string[] results = artdentifier.AnalyzePicture((BitmapImage)ImagePreview.Source);
+                ResultBox.Text = "";
+                ArtistHeader.Text = "Artist Names";
             }
             else
             {
