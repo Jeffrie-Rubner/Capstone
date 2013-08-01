@@ -14,7 +14,7 @@ namespace ArtDentifier
 {
     class ArtistDistinguisher
     {
-        private Dictionary<String, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
+        private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
         private List<ArtImage> PicassoPieces = new List<ArtImage>();
         private List<ArtImage> MonetPieces = new List<ArtImage>();
         private List<ArtImage> RaphaelPieces = new List<ArtImage>();
@@ -33,10 +33,11 @@ namespace ArtDentifier
         {
             ArtImage artImage = new ArtImage(bitmapImage);
             //method that compares first metric
-            testDimensionAspect(artImage);
+            string[] firstMetricStrings = getDimensionsStrings(testDimensionAspect(artImage));
+            
             //method that compares the second metric
         //    testColorScaleAspect(artImage);
-            return new string[] { "first", "second" };
+            return firstMetricStrings;
         }
 
         #region Metric Measuring Methods
@@ -46,9 +47,24 @@ namespace ArtDentifier
             colorSAD.determineBitFrequency(artImage);
 
         }
-        //related to DimensionAnalyzer
-        private void testDimensionAspect(ArtImage artImage)
+
+        #region Dimensions
+        private string[] getDimensionsStrings(Dictionary<string, double> dimensionRatios)
         {
+            string[] results = new string[10];
+            int i = 0;
+            foreach (KeyValuePair<string, double> kvp in dimensionRatios)
+            {
+                results[i] = kvp.Key;
+                results[i + 5] = "" + kvp.Value;
+                i++;
+            }
+            return results;
+        }
+
+        private Dictionary<string, double> testDimensionAspect(ArtImage artImage)
+        {
+            Dictionary<string, double> DimensionalCheckRatios = new Dictionary<string, double>();
             double dimensionalRatio = dimensionAnalyzer.getDimensionRatio(artImage);
             foreach (List<ArtImage> lists in allArtists.Values)
             {
@@ -63,11 +79,14 @@ namespace ArtDentifier
                 {
                     if(kvp.Value.Equals(lists))
                     {
-
+                        DimensionalCheckRatios.Add(kvp.Key, dimensionalSimilarity * 100);
                     }
                 }
             }
+            return DimensionalCheckRatios;
         }
+        #endregion
+
         #endregion
 
         #region InitializationMethods
