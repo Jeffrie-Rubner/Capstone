@@ -1,26 +1,33 @@
 (** denotes completion)
 
-Week 1
+Week 1 & 2
 ------
 **Write a machine learning program
 **The program will be able to differentiate colors
 **It will determine if a color is red or blue
 **The program will give a percentage chance for it to be a certain color
 
-Week 2
+Week 3
 ------
 Write Proposal
-Create a program that will analyze paintings
-Paintings will then be compared by 1 metric
+**Create a program that will analyze paintings
+**Paintings will then be compared by 1 metric
 **Determine which artists will be used for testing
 **Save Sample Images For Each artist
 **Read Sample Images into program
 **Determine first metric
 **Develop Method To measure first metric
-Develop Method to compare the first metric on multiple images
+**Develop Method to compare the first metric on multiple images
 
-Week 3
+Week 4
 ------
 Get 5 relevant metrics working
+	**Get analysis of dimensions done
+	get frequency of colors done
+	determine 3 more metrics to work on
+**Make Functional GUI
 research sampling
 research edge detection
+
+Week 5
+-------

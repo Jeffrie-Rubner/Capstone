@@ -1,17 +1,17 @@
 ﻿<Window x:Class="ArtDentifier.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="495" Width="650">
+        Title="MainWindow" Height="525" Width="720">
     <Grid>
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Width="260" Height="265" Margin="2,98,0,98">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Width="270" Height="265" Margin="2,98,0,98">
             <Button Content="Browse" Height="32" HorizontalAlignment="Center" 
     			x:Name="button1" VerticalAlignment="Bottom" Width="260" Click="button1_Click" Margin="0,0,0,10"/>
                 <Image Name="ImagePreview" Margin="0,0,0,42"/>
         </Grid>
-            <Grid Name ="AllResultsGrid" VerticalAlignment="Center" HorizontalAlignment="Right" Height="265" Margin="0,98,2,98" Width="355">
+            <Grid Name ="AllResultsGrid" VerticalAlignment="Center" HorizontalAlignment="Right" Height="265" Margin="0,98,2,98" Width="395">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60*"/>
-                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="45*"/>
                 <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="40*"/>
@@ -34,12 +34,12 @@
             <TextBlock Name="Artist3" HorizontalAlignment="Left" Margin="0,26.6,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="82" Grid.Row="2"/>
             <TextBlock Name="Artist4" HorizontalAlignment="Left" Margin="0,26.4,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="82" Grid.Row="3"/>
             <TextBlock Name="Artist5" HorizontalAlignment="Left" Margin="0,26.2,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="82" Grid.Row="4"/>
-            <TextBlock Name="ArtistHeader" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="82"/>
-            <TextBlock Name="Column1Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="54" Margin="0.4,0,0,0"/>
-            <TextBlock Name="Column2Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="2" Height="26" Width="54"/>
-            <TextBlock Name="Column3Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="3" Height="26" Width="54"/>
-            <TextBlock Name="Column4Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="54"/>
-            <TextBlock Name="Column5Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="5" Height="26" Width="54"/>
+            <TextBlock Name="ArtistHeader" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="27" Width="79"/>
+            <TextBlock Name="Column1Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="62" Margin="0.8,0,0,0"/>
+            <TextBlock Name="Column2Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="63" Grid.ColumnSpan="3" Margin="69.4,0,0,0"/>
+            <TextBlock Name="Column3Header" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="3" Height="26" Margin="0.4,0,0,0"  Width="61"/>
+            <TextBlock Name="Column4Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="3" Height="26" Width="63" Margin="61.4,0,0,0" Grid.ColumnSpan="3"/>
+            <TextBlock Name="Column5Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="5" Height="26" Width="63"/>
             
             <TextBlock Name="Column1Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="1" Height="26" Width="54" />
             <TextBlock Name="Column1Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="1" Height="26" Width="54" />

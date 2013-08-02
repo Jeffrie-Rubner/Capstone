@@ -56,7 +56,9 @@ namespace ArtDentifier
             foreach (KeyValuePair<string, double> kvp in dimensionRatios)
             {
                 results[i] = kvp.Key;
-                results[i + 5] = "" + kvp.Value;
+                string temp = "" + kvp.Value + ".0000";
+
+                results[i + 5] = temp.Substring(0,6);
                 i++;
             }
             return results;
