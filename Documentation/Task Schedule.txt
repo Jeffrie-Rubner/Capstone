@@ -9,7 +9,7 @@ Week 1 & 2
 
 Week 3
 ------
-Write Proposal
+**Write Proposal
 **Create a program that will analyze paintings
 **Paintings will then be compared by 1 metric
 **Determine which artists will be used for testing
@@ -31,3 +31,4 @@ research edge detection
 
 Week 5
 -------
+Get machine learning functioning on completed metrics

@@ -14,14 +14,19 @@ namespace ArtDentifier
 {
     class ArtistDistinguisher
     {
+        #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
         private List<ArtImage> PicassoPieces = new List<ArtImage>();
         private List<ArtImage> MonetPieces = new List<ArtImage>();
         private List<ArtImage> RaphaelPieces = new List<ArtImage>();
         private List<ArtImage> BlakePieces = new List<ArtImage>();
         private List<ArtImage> VanGoghPieces = new List<ArtImage>();
+        #endregion
+
+        #region Metric Class Fields
         private ColorScaleAspectDeterminer colorSAD = new ColorScaleAspectDeterminer();
         private DimensionAnalyzer dimensionAnalyzer = new DimensionAnalyzer();
+        #endregion
 
         public ArtistDistinguisher()
         {
