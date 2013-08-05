@@ -70,7 +70,7 @@ namespace ArtDentifier
                 ResultBox.Text = "";
                 ArtistHeader.Text = "Artist Names";
                 Column1Header.Text = "Dimensions";
-                Column2Header.Text = "Colors";
+                //Column2Header.Text = "Colors";
                 for (int i = 0; i < results.Length; i++)
                 { 
                     artistChanceValues[i / COUNT_OF_TOP_ARTISTS_SHOWN, i % (COUNT_OF_TOP_ARTISTS_SHOWN)] = results[i];
@@ -85,7 +85,7 @@ namespace ArtDentifier
             }
             else
             {
-                ResultBox.Text = "You Must Put In an image";
+                ResultBox.Text = "You must submit an image";
             }
         }
         #endregion

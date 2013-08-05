@@ -29,10 +29,11 @@ namespace ArtDentifier
                 for (int y = 0; y < bitmap.Height; y++)
                 {
                     int index = (y * stride) + (4 * x);
-                    currentR = pixels[index];
-                    currentG = pixels[index + 1];
-                    currentB = pixels[index + 2];
-                    currentA = pixels[index + 3];
+                    currentR = roundNumber(pixels[index]) > 250 ? 255 : roundNumber(pixels[index]);
+                    currentG = roundNumber(pixels[index + 1]) > 250 ? 255 : roundNumber(pixels[index+ 1]);
+                    currentB = roundNumber(pixels[index + 2]) > 250 ? 255 : roundNumber(pixels[index + 2]);
+                    currentA = roundNumber(pixels[index + 3]) > 250 ? 255 : roundNumber(pixels[index + 3]);
+
                     Color currentColor = Color.FromArgb((byte)currentA, (byte)currentR, (byte)currentG, (byte)currentB);
                     artImage.countColor(currentColor);
                 }
@@ -41,6 +42,11 @@ namespace ArtDentifier
         #endregion
 
         #region PrivateMethods
+        private int roundNumber(int i)
+        {
+            return (int)Math.Round(((double)i/10)) * 10;
+        }
+
         private byte[] ConvertBitmapImageToByteArray(BitmapImage bitmap)
         {
             int stride = bitmap.PixelWidth * 4;

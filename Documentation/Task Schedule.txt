@@ -31,4 +31,7 @@ research edge detection
 
 Week 5
 -------
-Get machine learning functioning on completed metrics
+sampling
+edge detection
+4 new metrics
+determine why method for pixel selection is slow

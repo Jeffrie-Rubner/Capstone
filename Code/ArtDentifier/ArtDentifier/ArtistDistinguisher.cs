@@ -41,17 +41,18 @@ namespace ArtDentifier
             string[] firstMetricStrings = getDimensionsStrings(testDimensionAspect(artImage));
             
             //method that compares the second metric
-        //    testColorScaleAspect(artImage);
+            testColorScaleAspect(artImage);
             return firstMetricStrings;
         }
 
         #region Metric Measuring Methods
-        //related to ColorScaleAspectDeterminer class
+
+        #region colorFrequency
         private void testColorScaleAspect(ArtImage artImage)
         {
             colorSAD.determineBitFrequency(artImage);
-
         }
+        #endregion
 
         #region Dimensions
         private string[] getDimensionsStrings(Dictionary<string, double> dimensionRatios)

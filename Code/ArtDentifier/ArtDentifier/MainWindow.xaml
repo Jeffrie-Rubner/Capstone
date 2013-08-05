@@ -8,7 +8,7 @@
     			x:Name="button1" VerticalAlignment="Bottom" Width="260" Click="button1_Click" Margin="0,0,0,10"/>
                 <Image Name="ImagePreview" Margin="0,0,0,42"/>
         </Grid>
-            <Grid Name ="AllResultsGrid" VerticalAlignment="Center" HorizontalAlignment="Right" Height="265" Margin="0,98,2,98" Width="395">
+            <Grid Name ="AllResultsGrid" VerticalAlignment="Center" HorizontalAlignment="Right" Height="265" Margin="0,98,2,98" Width="405">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="45*"/>
@@ -38,8 +38,8 @@
             <TextBlock Name="Column1Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="62" Margin="0.8,0,0,0"/>
             <TextBlock Name="Column2Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="63" Grid.ColumnSpan="3" Margin="69.4,0,0,0"/>
             <TextBlock Name="Column3Header" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="3" Height="26" Margin="0.4,0,0,0"  Width="61"/>
-            <TextBlock Name="Column4Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="3" Height="26" Width="63" Margin="61.4,0,0,0" Grid.ColumnSpan="3"/>
-            <TextBlock Name="Column5Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="5" Height="26" Width="63"/>
+            <TextBlock Name="Column4Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="63" Margin="1.4,0,0,0" Grid.ColumnSpan="2"/>
+            <TextBlock Name="Column5Header" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="5" Height="26" Width="63" Margin="0.4,0,-0.2,0"/>
             
             <TextBlock Name="Column1Row5" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="5"  Grid.Column="1" Height="26" Width="54" />
             <TextBlock Name="Column1Row4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="4" Grid.Column="1" Height="26" Width="54" />
