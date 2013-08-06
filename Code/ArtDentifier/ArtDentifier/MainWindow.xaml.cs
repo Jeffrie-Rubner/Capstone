@@ -23,7 +23,7 @@ namespace ArtDentifier
     {
         #region Fields
         private readonly int COUNT_OF_TOP_ARTISTS_SHOWN = 5;
-        private readonly int METRICS_MESURED_ON = 2;
+        private readonly int METRICS_MESURED_ON = 3;
         private ArtistDistinguisher artdentifier;
         private string[,] artistChanceValues;
         private TextBlock[,] resultGrid;
@@ -70,7 +70,7 @@ namespace ArtDentifier
                 ResultBox.Text = "";
                 ArtistHeader.Text = "Artist Names";
                 Column1Header.Text = "Dimensions";
-                //Column2Header.Text = "Colors";
+                Column2Header.Text = "Colors";
                 for (int i = 0; i < results.Length; i++)
                 { 
                     artistChanceValues[i / COUNT_OF_TOP_ARTISTS_SHOWN, i % (COUNT_OF_TOP_ARTISTS_SHOWN)] = results[i];

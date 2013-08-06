@@ -14,6 +14,9 @@ namespace ArtDentifier
 {
     class ArtistDistinguisher
     {
+        //working cells is the value of the (number of working metrics +1) times 5
+        private readonly int WorkingCellCount = 15;
+
         #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
         private List<ArtImage> PicassoPieces = new List<ArtImage>();
@@ -37,24 +40,36 @@ namespace ArtDentifier
         public string[] AnalyzePicture(BitmapImage bitmapImage)
         {
             ArtImage artImage = new ArtImage(bitmapImage);
+            string[] arrayOfEachColumnCellValue = new string[15];
+
             //method that compares first metric
-            string[] firstMetricStrings = getDimensionsStrings(testDimensionAspect(artImage));
+            Dictionary<string, double> firstMetricValues = testDimensionAspect(artImage);
             
             //method that compares the second metric
-            testColorScaleAspect(artImage);
-            return firstMetricStrings;
+            Dictionary<string, double> secondMetricValues = testColorScaleAspect(artImage);
+            int i = 0;
+
+            //fills the string array for the fields
+            foreach (string artistName in allArtists.Keys)
+            {
+                arrayOfEachColumnCellValue[i] = artistName;
+
+                string temp1 = "" + firstMetricValues[artistName] + ".0000";
+                arrayOfEachColumnCellValue[i + 5] = temp1.Substring(0, 6);
+
+                string temp2 = "" + secondMetricValues[artistName] + ".0000";
+                arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
+                i++;
+            }
+            return arrayOfEachColumnCellValue;
         }
 
         #region Metric Measuring Methods
 
         #region colorFrequency
-        private void testColorScaleAspect(ArtImage artImage)
+        private Dictionary<string, double> testColorScaleAspect(ArtImage artImage)
         {
             colorSAD.determineBitFrequency(artImage);
-            testMostFrequentColor(artImage);
-        }
-        private Dictionary<string, double> testMostFrequentColor(ArtImage artImage)
-        {
             Dictionary<string, double> colorCheckRatios = new Dictionary<string, double>();
             Color Inputcolor = artImage.getMostFrequentColor();
             foreach (List<ArtImage> lists in allArtists.Values)
@@ -62,8 +77,12 @@ namespace ArtDentifier
                 double colorSimilarity = 0.00;
                 foreach (ArtImage a in lists)
                 {
-
-                    double tempSimilarity = 0.11;
+                    Color comparitorColor = a.getMostFrequentColor();
+                    double redRatio = ((double)Math.Abs(Inputcolor.R - comparitorColor.R)) / 255;
+                    double greenRatio = ((double)Math.Abs(Inputcolor.G - comparitorColor.G)) / 255;
+                    double blueRatio = ((double)Math.Abs(Inputcolor.B - comparitorColor.B)) / 255;
+                    double alphaRatio = ((double)Math.Abs(Inputcolor.A - comparitorColor.A)) / 255;
+                    double tempSimilarity = 1 - ((redRatio + greenRatio + blueRatio + alphaRatio) / 4.00);
                     colorSimilarity = tempSimilarity > colorSimilarity ? tempSimilarity : colorSimilarity;
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
