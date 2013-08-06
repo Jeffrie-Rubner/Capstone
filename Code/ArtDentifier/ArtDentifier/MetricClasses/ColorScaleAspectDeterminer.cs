@@ -15,10 +15,10 @@ namespace ArtDentifier
     {
         #region PublicMethods
         //checks every pixel in an artImage, and counts each time a specific color occurs
-        public void determineBitFrequency(ArtImage artImage)
+        public async void determineBitFrequency(ArtImage artImage)
         {
             BitmapImage bitmap = artImage.getBitmapImage();
-            byte[] pixels = ConvertBitmapImageToByteArray(bitmap);
+            byte[] pixels = await ConvertBitmapImageToByteArray(bitmap);
             int stride = bitmap.PixelWidth * 4;
             int currentR = 0;
             int currentG = 0;
