@@ -36,5 +36,10 @@ namespace ArtDentifier
         {
             ColorOccurenceCounter.addColor(color);
         }
+
+        public Color getMostFrequentColor()
+        {
+            return ColorOccurenceCounter.getMostFrequentColor();
+        }
     }
 }

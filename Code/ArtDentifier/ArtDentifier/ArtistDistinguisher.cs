@@ -51,6 +51,30 @@ namespace ArtDentifier
         private void testColorScaleAspect(ArtImage artImage)
         {
             colorSAD.determineBitFrequency(artImage);
+            testMostFrequentColor(artImage);
+        }
+        private Dictionary<string, double> testMostFrequentColor(ArtImage artImage)
+        {
+            Dictionary<string, double> colorCheckRatios = new Dictionary<string, double>();
+            Color Inputcolor = artImage.getMostFrequentColor();
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double colorSimilarity = 0.00;
+                foreach (ArtImage a in lists)
+                {
+
+                    double tempSimilarity = 0.11;
+                    colorSimilarity = tempSimilarity > colorSimilarity ? tempSimilarity : colorSimilarity;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if (kvp.Value.Equals(lists))
+                    {
+                        colorCheckRatios.Add(kvp.Key, colorSimilarity * 100);
+                    }
+                }
+            }
+            return colorCheckRatios;
         }
         #endregion
 
@@ -112,6 +136,8 @@ namespace ArtDentifier
             {
                 Thread t = new Thread(new ParameterizedThreadStart(this.ImageGrabMethod));
                 t.Start(kvp);
+                Thread secondT = new Thread(new ParameterizedThreadStart(this.InitializeColors));
+                secondT.Start(kvp);
             }
         }
 
@@ -132,6 +158,15 @@ namespace ArtDentifier
                 {
                     Console.WriteLine(e.StackTrace);
                 }
+            }
+        }
+
+        private void InitializeColors(object obj)
+        {
+            KeyValuePair<String, List<ArtImage>> kvp = (KeyValuePair<String, List<ArtImage>>)obj;
+            foreach (ArtImage image in kvp.Value)
+            {
+                colorSAD.determineBitFrequency(image);
             }
         }
         #endregion

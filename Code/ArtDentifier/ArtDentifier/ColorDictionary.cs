@@ -36,7 +36,7 @@ namespace ArtDentifier
             }
             checkSize();
             Colors[listSize] = color;
-            CountValue[listSize] = 0;
+            CountValue[listSize] = 1;
             listSize++;
         }
 
