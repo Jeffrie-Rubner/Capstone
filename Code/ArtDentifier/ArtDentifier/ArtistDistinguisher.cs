@@ -155,8 +155,6 @@ namespace ArtDentifier
             {
                 Thread t = new Thread(new ParameterizedThreadStart(this.ImageGrabMethod));
                 t.Start(kvp);
-                Thread secondT = new Thread(new ParameterizedThreadStart(this.InitializeColors));
-                secondT.Start(kvp);
             }
         }
 
@@ -178,6 +176,7 @@ namespace ArtDentifier
                     Console.WriteLine(e.StackTrace);
                 }
             }
+            InitializeColors(kvp);
         }
 
         private void InitializeColors(object obj)
