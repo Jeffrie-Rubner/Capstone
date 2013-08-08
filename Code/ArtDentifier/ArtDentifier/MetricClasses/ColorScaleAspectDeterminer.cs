@@ -18,7 +18,7 @@ namespace ArtDentifier
         public async void determineBitFrequency(ArtImage artImage)
         {
             BitmapImage bitmap = artImage.getBitmapImage();
-            byte[] pixels = await ConvertBitmapImageToByteArray(bitmap);
+            byte[] pixels = await GetByteArray(bitmap);
             int stride = bitmap.PixelWidth * 4;
             int currentR = 0;
             int currentG = 0;
@@ -56,5 +56,17 @@ namespace ArtDentifier
             return pixels;
         }
         #endregion
+
+        private Task<byte[]> GetByteArray(BitmapImage bitmap)
+        {
+            Task<byte[]> byteArrayTask;
+            Func<BitmapImage, byte[]> ByteArrayDel = ConvertBitmapImageToByteArray;
+            byteArrayTask = new Task<byte[]>(ByteArrayDel, bitmap);
+            return byteArrayTask;
+        }
+
+        
+        
+
     }
 }
