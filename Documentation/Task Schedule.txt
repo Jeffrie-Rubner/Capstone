@@ -23,7 +23,7 @@ Week 4
 ------
 Get 5 relevant metrics working
 	**Get analysis of dimensions done
-	get frequency of colors done
+	**get frequency of colors done
 	determine 3 more metrics to work on
 **Make Functional GUI
 research sampling
@@ -34,4 +34,4 @@ Week 5
 sampling
 edge detection
 4 new metrics
-determine why method for pixel selection is slow
+**determine why method for pixel selection is slow

@@ -17,9 +17,6 @@ namespace ArtDentifier
         //working cells is the value of the (number of working metrics +1) times 5
         private readonly int WorkingCellCount = 15;
 
-        private delegate void ColorInitializer(object obj);
-        private ColorInitializer colorInitializer;
-
         #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
         private List<ArtImage> PicassoPieces = new List<ArtImage>();
@@ -38,7 +35,6 @@ namespace ArtDentifier
         {
             AddArtistsToDictionary();
             InitializeArtists();
-            colorInitializer = new ColorInitializer(InitializeColors);
         }
 
         public string[] AnalyzePicture(BitmapImage bitmapImage)
@@ -180,15 +176,15 @@ namespace ArtDentifier
                     Console.WriteLine(e.StackTrace);
                 }
             }
-            colorInitializer.BeginInvoke(kvp, null, null);
+            InitializeColors(kvp);
         }
 
-        private void InitializeColors(object obj)
+        private void InitializeColors(KeyValuePair<String, List<ArtImage>> kvp)
         {
-            KeyValuePair<String, List<ArtImage>> kvp = (KeyValuePair<String, List<ArtImage>>)obj;
             foreach (ArtImage image in kvp.Value)
             {
-                colorSAD.determineBitFrequency(image);
+                ArtImage clonedImage = image.clone();
+                new ColorScaleAspectDeterminer().determineBitFrequency(clonedImage);
             }
         }
         #endregion

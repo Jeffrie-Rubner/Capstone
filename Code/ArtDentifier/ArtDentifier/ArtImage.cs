@@ -25,6 +25,15 @@ namespace ArtDentifier
             Width = ActualImage.PixelWidth;
             Height = ActualImage.PixelHeight;
         }
+
+        private ArtImage(BitmapImage bitmapImage, ColorDictionary colorDictionary)
+        {
+            ColorOccurenceCounter = colorDictionary;
+            ActualImage = bitmapImage;
+            Width = ActualImage.PixelWidth;
+            Height = ActualImage.PixelHeight;
+
+        }
         #endregion
 
         public BitmapImage getBitmapImage()
@@ -40,6 +49,11 @@ namespace ArtDentifier
         public Color getMostFrequentColor()
         {
             return ColorOccurenceCounter.getMostFrequentColor();
+        }
+
+        public ArtImage clone()
+        {
+            return new ArtImage(this.ActualImage, this.ColorOccurenceCounter);
         }
     }
 }

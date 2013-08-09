@@ -15,10 +15,10 @@ namespace ArtDentifier
     {
         #region PublicMethods
         //checks every pixel in an artImage, and counts each time a specific color occurs
-        public async void determineBitFrequency(ArtImage artImage)
+        public void determineBitFrequency(ArtImage artImage)
         {
             BitmapImage bitmap = artImage.getBitmapImage();
-            byte[] pixels = await GetByteArray(bitmap);
+            byte[] pixels = ConvertBitmapImageToByteArray(bitmap);
             int stride = bitmap.PixelWidth * 4;
             int currentR = 0;
             int currentG = 0;
@@ -56,17 +56,5 @@ namespace ArtDentifier
             return pixels;
         }
         #endregion
-
-        private Task<byte[]> GetByteArray(BitmapImage bitmap)
-        {
-            Task<byte[]> byteArrayTask;
-            Func<BitmapImage, byte[]> ByteArrayDel = ConvertBitmapImageToByteArray;
-            byteArrayTask = new Task<byte[]>(ByteArrayDel, bitmap);
-            return byteArrayTask;
-        }
-
-        
-        
-
     }
 }

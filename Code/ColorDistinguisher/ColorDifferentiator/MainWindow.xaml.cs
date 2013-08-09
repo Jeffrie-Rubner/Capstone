@@ -55,6 +55,10 @@ namespace ColorDifferentiator
                 {
                     GreenNum.Text = "" + (int)slider.Value;
                 }
+                else if (slider.Name.Equals("ASlider"))
+                {
+                    ANum.Text = "" + (int)slider.Value;
+                }
                 updateColorBox();
             }
         }
@@ -71,7 +75,8 @@ namespace ColorDifferentiator
             byte redval = ((int)RedSlider.Value) > 255 ? (byte)255 : (byte)((int)RedSlider.Value);
             byte blueval = ((int)BlueSlider.Value) > 255 ? (byte)255 : (byte)((int)BlueSlider.Value);
             byte greenval = ((int)GreenSlider.Value) > 255 ? (byte)255 : (byte)((int)GreenSlider.Value);
-            CurrentColorOfRectangle = Color.FromRgb(redval, greenval, blueval);
+            byte aval = ((int)ASlider.Value) > 255 ? (byte)255 : (byte)((int)ASlider.Value);
+            CurrentColorOfRectangle = Color.FromArgb(aval, redval, greenval, blueval);
             ColorChosen.Fill = new SolidColorBrush(CurrentColorOfRectangle);
         }
         #endregion
