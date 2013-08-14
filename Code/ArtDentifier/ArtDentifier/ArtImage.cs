@@ -46,7 +46,7 @@ namespace ArtDentifier
         public void countColor(Color color)
         {
             ColorOccurenceCounter.addColor(color);
-
+            IndividualColorTracker.addColor(color);
         }
 
         public Color getMostFrequentColor()

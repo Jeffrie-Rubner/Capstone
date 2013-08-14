@@ -40,7 +40,7 @@ namespace ArtDentifier
         public string[] AnalyzePicture(BitmapImage bitmapImage)
         {
             ArtImage artImage = new ArtImage(bitmapImage);
-            string[] arrayOfEachColumnCellValue = new string[15];
+            string[] arrayOfEachColumnCellValue = new string[WorkingCellCount];
 
             //method that compares first metric
             Dictionary<string, double> firstMetricValues = testDimensionAspect(artImage);
@@ -66,7 +66,7 @@ namespace ArtDentifier
 
         #region Metric Measuring Methods
 
-        #region colorFrequency
+        #region ColorFrequency
         private Dictionary<string, double> testColorScaleAspect(ArtImage artImage)
         {
             colorSAD.determineBitFrequency(artImage);
@@ -98,21 +98,6 @@ namespace ArtDentifier
         #endregion
 
         #region Dimensions
-        private string[] getDimensionsStrings(Dictionary<string, double> dimensionRatios)
-        {
-            string[] results = new string[10];
-            int i = 0;
-            foreach (KeyValuePair<string, double> kvp in dimensionRatios)
-            {
-                results[i] = kvp.Key;
-                string temp = "" + kvp.Value + ".0000";
-
-                results[i + 5] = temp.Substring(0,6);
-                i++;
-            }
-            return results;
-        }
-
         private Dictionary<string, double> testDimensionAspect(ArtImage artImage)
         {
             Dictionary<string, double> DimensionalCheckRatios = new Dictionary<string, double>();
@@ -136,6 +121,36 @@ namespace ArtDentifier
             }
             return DimensionalCheckRatios;
         }
+        #endregion
+
+        #region ImageTypes
+
+        //need 4 methods to compare ARGB values.  ARGB values can help determine the type of image a painting is (such as landscape, portrait, mural, etc.)
+        private Dictionary<string, double> compareImageRed(ArtImage artImage)
+        {
+            Dictionary<string, double> redCheckRatios = new Dictionary<string, double>();
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double redSimilarity = 0.00;
+                byte inputRed = 50;
+                foreach (ArtImage a in lists)
+                {
+                    byte redValue = 50;
+                    double redRatio = ((double)Math.Abs(redValue - inputRed)) / 255;
+                    double tempSimilarity = 1 - redRatio;
+                    redSimilarity = tempSimilarity > redSimilarity ? tempSimilarity : redSimilarity;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if (kvp.Value.Equals(lists))
+                    {
+                        redCheckRatios.Add(kvp.Key, redSimilarity * 100);
+                    }
+                }
+            }
+            return redCheckRatios;
+        }
+
         #endregion
 
         #endregion
