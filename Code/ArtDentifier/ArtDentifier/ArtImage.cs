@@ -15,7 +15,8 @@ namespace ArtDentifier
         public double Width {get{return width;} private set{width = value;}}
         private double height;
         public double Height {get{return height;} private set{height = value;}}
-        ColorDictionary ColorOccurenceCounter;
+        private ColorDictionary ColorOccurenceCounter;
+        private ColorDivider IndividualColorTracker;
 
         #region Constructor
         public ArtImage(BitmapImage bitmapImage)
@@ -24,6 +25,7 @@ namespace ArtDentifier
             ActualImage = bitmapImage;
             Width = ActualImage.PixelWidth;
             Height = ActualImage.PixelHeight;
+            IndividualColorTracker = new ColorDivider();
         }
 
         private ArtImage(BitmapImage bitmapImage, ColorDictionary colorDictionary)
@@ -32,7 +34,7 @@ namespace ArtDentifier
             ActualImage = bitmapImage;
             Width = ActualImage.PixelWidth;
             Height = ActualImage.PixelHeight;
-
+            IndividualColorTracker = new ColorDivider();
         }
         #endregion
 
@@ -44,6 +46,7 @@ namespace ArtDentifier
         public void countColor(Color color)
         {
             ColorOccurenceCounter.addColor(color);
+
         }
 
         public Color getMostFrequentColor()
@@ -55,5 +58,9 @@ namespace ArtDentifier
         {
             return new ArtImage(this.ActualImage, this.ColorOccurenceCounter);
         }
+
+
+
+
     }
 }
