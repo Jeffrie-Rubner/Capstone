@@ -27,7 +27,7 @@ Get 5 relevant metrics working
 	determine 3 more metrics to work on
 **Make Functional GUI
 research sampling
-research edge detection
+**research edge detection
 
 Week 5
 -------
@@ -35,3 +35,8 @@ sampling
 edge detection
 4 new metrics
 **determine why method for pixel selection is slow
+
+Week 6
+--------
+Complete all metrics
+Show motivation on project
