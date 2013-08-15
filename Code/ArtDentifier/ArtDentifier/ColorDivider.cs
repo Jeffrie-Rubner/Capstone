@@ -64,16 +64,17 @@ namespace ArtDentifier
 
         private byte getMostFrequentValue(string s)
         {
-            int indexOfMax = 0;
-            for (int i = 1; i < OccurenceWrapper[s].Count; i++)
+            int valueOfMax = 0;
+            byte valueToReturn = 0;
+            foreach(int values in OccurenceWrapper[s].Values)
             {
-                if (OccurenceWrapper[s][i] > OccurenceWrapper[s][indexOfMax])
+                if (values > valueOfMax)
                 {
-                    indexOfMax = i;
+                    valueOfMax = values;
                 }
             }
-            // need to get key value
-            return OccurenceWrapper[s][indexOfMax];
+            valueToReturn = (byte)OccurenceWrapper[s].FirstOrDefault(x => x.Value == valueOfMax).Key;
+            return valueToReturn;
         }
         #endregion
 
