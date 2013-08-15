@@ -41,6 +41,42 @@ namespace ArtDentifier
             }
         }
 
+        #region Getters
+        public byte getMostFrequentRed()
+        {
+            return getMostFrequentValue("red");
+        }
+
+        public byte getMostFrequentGreen()
+        {
+            return getMostFrequentValue("green");
+        }
+
+        public byte getMostFrequentBlue()
+        {
+            return getMostFrequentValue("blue");
+        }
+
+        public byte getMostFrequentAlpha()
+        {
+            return getMostFrequentValue("alpha");
+        }
+
+        private byte getMostFrequentValue(string s)
+        {
+            int indexOfMax = 0;
+            for (int i = 1; i < OccurenceWrapper[s].Count; i++)
+            {
+                if (OccurenceWrapper[s][i] > OccurenceWrapper[s][indexOfMax])
+                {
+                    indexOfMax = i;
+                }
+            }
+            // need to get key value
+            return OccurenceWrapper[s][indexOfMax];
+        }
+        #endregion
+
         private void initializeColorDictionaries()
         {
             RedOccurences = new Dictionary<int, int>();

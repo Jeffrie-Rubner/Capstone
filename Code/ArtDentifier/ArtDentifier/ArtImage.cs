@@ -43,6 +43,28 @@ namespace ArtDentifier
             return ActualImage;
         }
 
+        #region ColorDividerWrappers
+        public byte getMostFrequentRed()
+        {
+            return IndividualColorTracker.getMostFrequentRed();
+        }
+
+        public byte getMostFrequentGreen()
+        {
+            return IndividualColorTracker.getMostFrequentGreen();
+        }
+
+        public byte getMostFrequentBlue()
+        {
+            return IndividualColorTracker.getMostFrequentBlue();
+        }
+
+        public byte getMostFrequentAlpha()
+        {
+            return IndividualColorTracker.getMostFrequentAlpha();
+        }
+        #endregion
+
         public void countColor(Color color)
         {
             ColorOccurenceCounter.addColor(color);

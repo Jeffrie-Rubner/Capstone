@@ -31,11 +31,13 @@ namespace ArtDentifier
         private DimensionAnalyzer dimensionAnalyzer = new DimensionAnalyzer();
         #endregion
 
+        #region Constructor
         public ArtistDistinguisher()
         {
             AddArtistsToDictionary();
             InitializeArtists();
         }
+        #endregion
 
         public string[] AnalyzePicture(BitmapImage bitmapImage)
         {
@@ -124,7 +126,6 @@ namespace ArtDentifier
         #endregion
 
         #region ImageTypes
-
         //need 4 methods to compare ARGB values.  ARGB values can help determine the type of image a painting is (such as landscape, portrait, mural, etc.)
         private Dictionary<string, double> compareImageRed(ArtImage artImage)
         {
@@ -132,10 +133,10 @@ namespace ArtDentifier
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double redSimilarity = 0.00;
-                byte inputRed = 50;
+                byte inputRed = artImage.getMostFrequentRed();
                 foreach (ArtImage a in lists)
                 {
-                    byte redValue = 50;
+                    byte redValue = a.getMostFrequentRed();
                     double redRatio = ((double)Math.Abs(redValue - inputRed)) / 255;
                     double tempSimilarity = 1 - redRatio;
                     redSimilarity = tempSimilarity > redSimilarity ? tempSimilarity : redSimilarity;
@@ -149,6 +150,81 @@ namespace ArtDentifier
                 }
             }
             return redCheckRatios;
+        }
+
+        private Dictionary<string, double> compareImageGreen(ArtImage artImage)
+        {
+            Dictionary<string, double> greenCheckRatios = new Dictionary<string, double>();
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double greenSimilarity = 0.00;
+                byte inputGreen = artImage.getMostFrequentGreen();
+                foreach (ArtImage a in lists)
+                {
+                    byte greenValue = a.getMostFrequentGreen();
+                    double greenRatio = ((double)Math.Abs(greenValue - inputGreen)) / 255;
+                    double tempSimilarity = 1 - greenRatio;
+                    greenSimilarity = tempSimilarity > greenSimilarity ? tempSimilarity : greenSimilarity;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if (kvp.Value.Equals(lists))
+                    {
+                        greenCheckRatios.Add(kvp.Key, greenSimilarity * 100);
+                    }
+                }
+            }
+            return greenCheckRatios;
+        }
+
+        private Dictionary<string, double> compareImageBlue(ArtImage artImage)
+        {
+            Dictionary<string, double> blueCheckRatios = new Dictionary<string, double>();
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double blueSimilarity = 0.00;
+                byte inputBlue = artImage.getMostFrequentBlue();
+                foreach (ArtImage a in lists)
+                {
+                    byte blueValue = a.getMostFrequentBlue();
+                    double blueRatio = ((double)Math.Abs(blueValue - inputBlue)) / 255;
+                    double tempSimilarity = 1 - blueRatio;
+                    blueSimilarity = tempSimilarity > blueSimilarity ? tempSimilarity : blueSimilarity;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if (kvp.Value.Equals(lists))
+                    {
+                        blueCheckRatios.Add(kvp.Key, blueSimilarity * 100);
+                    }
+                }
+            }
+            return blueCheckRatios;
+        }
+
+        private Dictionary<string, double> compareImageAlpha(ArtImage artImage)
+        {
+            Dictionary<string, double> alphaCheckRatios = new Dictionary<string, double>();
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double alphaSimilarity = 0.00;
+                byte inputAlpha = artImage.getMostFrequentAlpha();
+                foreach (ArtImage a in lists)
+                {
+                    byte alphaValue = a.getMostFrequentAlpha();
+                    double alphaRatio = ((double)Math.Abs(alphaValue - inputAlpha)) / 255;
+                    double tempSimilarity = 1 - alphaRatio;
+                    alphaSimilarity = tempSimilarity > alphaSimilarity ? tempSimilarity : alphaSimilarity;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if (kvp.Value.Equals(lists))
+                    {
+                        alphaCheckRatios.Add(kvp.Key, alphaSimilarity * 100);
+                    }
+                }
+            }
+            return alphaCheckRatios;
         }
 
         #endregion
