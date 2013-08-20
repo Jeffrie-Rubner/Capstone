@@ -15,7 +15,7 @@ namespace ArtDentifier
     class ArtistDistinguisher
     {
         //working cells is the value of the (number of working metrics +1) times 5
-        private readonly int WorkingCellCount = 15;
+        private readonly int WorkingCellCount = 25;
 
         #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
@@ -49,9 +49,15 @@ namespace ArtDentifier
             
             //method that compares the second metric
             Dictionary<string, double> secondMetricValues = testColorScaleAspect(artImage);
-            int i = 0;
+            
+            //method for third metric
+            Dictionary<string, double> thirdMetricValues = testImageType(artImage);
+
+            //method for obtaining the mean column values
+            Dictionary<string, double> averageColumnValues = getColumnAverages();
 
             //fills the string array for the fields
+            int i = 0;
             foreach (string artistName in allArtists.Keys)
             {
                 arrayOfEachColumnCellValue[i] = artistName;
@@ -127,6 +133,14 @@ namespace ArtDentifier
 
         #region ImageTypes
         //need 4 methods to compare ARGB values.  ARGB values can help determine the type of image a painting is (such as landscape, portrait, mural, etc.)
+
+        private Dictionary<string, double> testImageType(ArtImage artImage)
+        {
+
+
+            return redColorResults;
+        }
+
         private Dictionary<string, double> compareImageRed(ArtImage artImage)
         {
             Dictionary<string, double> redCheckRatios = new Dictionary<string, double>();
@@ -230,6 +244,12 @@ namespace ArtDentifier
         #endregion
 
         #endregion
+
+        private Dictionary<string, double> getColumnAverages()
+        {
+
+            return null;
+        }
 
         #region InitializationMethods
         private void AddArtistsToDictionary()

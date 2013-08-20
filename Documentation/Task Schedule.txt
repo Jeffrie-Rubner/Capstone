@@ -45,5 +45,5 @@ Week 7
 ------
 Make actual progress on the project.
 Complete all metrics (minimum 5)
-Gather additional sample images
-gather more test images
+**Gather additional sample images
+**gather more test images
