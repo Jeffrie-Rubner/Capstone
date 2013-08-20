@@ -23,7 +23,7 @@ namespace ArtDentifier
     {
         #region Fields
         private readonly int COUNT_OF_TOP_ARTISTS_SHOWN = 5;
-        private readonly int METRICS_MESURED_ON = 3;
+        private readonly int METRICS_MESURED_ON = 4;
         private ArtistDistinguisher artdentifier;
         private string[,] artistChanceValues;
         private TextBlock[,] resultGrid;

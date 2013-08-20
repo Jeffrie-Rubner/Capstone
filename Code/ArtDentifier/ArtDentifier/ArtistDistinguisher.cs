@@ -15,7 +15,7 @@ namespace ArtDentifier
     class ArtistDistinguisher
     {
         //working cells is the value of the (number of working metrics +1) times 5
-        private readonly int WorkingCellCount = 25;
+        private readonly int WorkingCellCount = 20;
 
         #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
@@ -42,19 +42,17 @@ namespace ArtDentifier
         public string[] AnalyzePicture(BitmapImage bitmapImage)
         {
             ArtImage artImage = new ArtImage(bitmapImage);
+            colorSAD.determineBitFrequency(artImage);
             string[] arrayOfEachColumnCellValue = new string[WorkingCellCount];
 
             //method that compares first metric
             Dictionary<string, double> firstMetricValues = testDimensionAspect(artImage);
             
-            //method that compares the second metric
-            Dictionary<string, double> secondMetricValues = testColorScaleAspect(artImage);
-            
-            //method for third metric
-            Dictionary<string, double> thirdMetricValues = testImageType(artImage);
+            //method for second metric
+            Dictionary<string, double> secondMetricValues = testImageType(artImage);
 
             //method for obtaining the mean column values
-            Dictionary<string, double> averageColumnValues = getColumnAverages();
+            Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues);
 
             //fills the string array for the fields
             int i = 0;
@@ -67,43 +65,15 @@ namespace ArtDentifier
 
                 string temp2 = "" + secondMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
+
+                string temp3 = "" + averageColumnValues[artistName] + ".0000";
+                arrayOfEachColumnCellValue[i + 15] = temp2.Substring(0, 6);
                 i++;
             }
             return arrayOfEachColumnCellValue;
         }
 
         #region Metric Measuring Methods
-
-        #region ColorFrequency
-        private Dictionary<string, double> testColorScaleAspect(ArtImage artImage)
-        {
-            colorSAD.determineBitFrequency(artImage);
-            Dictionary<string, double> colorCheckRatios = new Dictionary<string, double>();
-            Color Inputcolor = artImage.getMostFrequentColor();
-            foreach (List<ArtImage> lists in allArtists.Values)
-            {
-                double colorSimilarity = 0.00;
-                foreach (ArtImage a in lists)
-                {
-                    Color comparitorColor = a.getMostFrequentColor();
-                    double redRatio = ((double)Math.Abs(Inputcolor.R - comparitorColor.R)) / 255;
-                    double greenRatio = ((double)Math.Abs(Inputcolor.G - comparitorColor.G)) / 255;
-                    double blueRatio = ((double)Math.Abs(Inputcolor.B - comparitorColor.B)) / 255;
-                    double alphaRatio = ((double)Math.Abs(Inputcolor.A - comparitorColor.A)) / 255;
-                    double tempSimilarity = 1 - ((redRatio + greenRatio + blueRatio + alphaRatio) / 4.00);
-                    colorSimilarity = tempSimilarity > colorSimilarity ? tempSimilarity : colorSimilarity;
-                }
-                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
-                {
-                    if (kvp.Value.Equals(lists))
-                    {
-                        colorCheckRatios.Add(kvp.Key, colorSimilarity * 100);
-                    }
-                }
-            }
-            return colorCheckRatios;
-        }
-        #endregion
 
         #region Dimensions
         private Dictionary<string, double> testDimensionAspect(ArtImage artImage)
@@ -132,11 +102,22 @@ namespace ArtDentifier
         #endregion
 
         #region ImageTypes
-        //need 4 methods to compare ARGB values.  ARGB values can help determine the type of image a painting is (such as landscape, portrait, mural, etc.)
 
         private Dictionary<string, double> testImageType(ArtImage artImage)
         {
+            Dictionary<string, double> ColorResultReturns = new Dictionary<string, double>();
 
+            Dictionary<string, double> redColorResults = compareImageRed(artImage);
+            Dictionary<string, double> greenColorResults = compareImageGreen(artImage);
+            Dictionary<string, double> blueColorResults = compareImageBlue(artImage);
+            Dictionary<string, double> alphaColorResults = compareImageAlpha(artImage);
+
+            foreach (string artistName in allArtists.Keys)
+            {
+                double meanColorValues = (redColorResults[artistName] + greenColorResults[artistName] 
+                    + blueColorResults[artistName] + alphaColorResults[artistName])/4;
+                ColorResultReturns.Add(artistName, meanColorValues);
+            }
 
             return redColorResults;
         }
@@ -245,10 +226,15 @@ namespace ArtDentifier
 
         #endregion
 
-        private Dictionary<string, double> getColumnAverages()
+        private Dictionary<string, double> getColumnAverages(Dictionary<string, double> column1, Dictionary<string, double> column2)
         {
-
-            return null;
+            Dictionary<string, double> averageColumnValues = new Dictionary<string, double>();
+            foreach (string s in allArtists.Keys)
+            {
+                double value = (column1[s] + column2[s])/2;
+                averageColumnValues.Add(s, value);
+            }
+            return averageColumnValues;
         }
 
         #region InitializationMethods
