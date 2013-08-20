@@ -71,6 +71,7 @@ namespace ArtDentifier
                 ArtistHeader.Text = "Artist Names";
                 Column1Header.Text = "Dimensions";
                 Column2Header.Text = "Colors";
+                Column3Header.Text = "Average";
                 for (int i = 0; i < results.Length; i++)
                 { 
                     artistChanceValues[i / COUNT_OF_TOP_ARTISTS_SHOWN, i % (COUNT_OF_TOP_ARTISTS_SHOWN)] = results[i];

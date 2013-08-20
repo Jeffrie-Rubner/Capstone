@@ -42,14 +42,13 @@ namespace ArtDentifier
         public string[] AnalyzePicture(BitmapImage bitmapImage)
         {
             ArtImage artImage = new ArtImage(bitmapImage);
-            colorSAD.determineBitFrequency(artImage);
             string[] arrayOfEachColumnCellValue = new string[WorkingCellCount];
 
             //method that compares first metric
             Dictionary<string, double> firstMetricValues = testDimensionAspect(artImage);
             
             //method for second metric
-            Dictionary<string, double> secondMetricValues = testImageType(artImage);
+            Dictionary<string, double> secondMetricValues = testColor(artImage);
 
             //method for obtaining the mean column values
             Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues);
@@ -67,7 +66,7 @@ namespace ArtDentifier
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
 
                 string temp3 = "" + averageColumnValues[artistName] + ".0000";
-                arrayOfEachColumnCellValue[i + 15] = temp2.Substring(0, 6);
+                arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
                 i++;
             }
             return arrayOfEachColumnCellValue;
@@ -103,8 +102,9 @@ namespace ArtDentifier
 
         #region ImageTypes
 
-        private Dictionary<string, double> testImageType(ArtImage artImage)
+        private Dictionary<string, double> testColor(ArtImage artImage)
         {
+            colorSAD.determineBitFrequency(artImage);
             Dictionary<string, double> ColorResultReturns = new Dictionary<string, double>();
 
             Dictionary<string, double> redColorResults = compareImageRed(artImage);
