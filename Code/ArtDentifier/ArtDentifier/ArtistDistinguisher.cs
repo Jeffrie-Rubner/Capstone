@@ -15,7 +15,7 @@ namespace ArtDentifier
     class ArtistDistinguisher
     {
         //working cells is the value of the (number of working metrics +1) times 5
-        private readonly int WorkingCellCount = 20;
+        private readonly int WorkingCellCount = 25;
 
         #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
@@ -50,8 +50,11 @@ namespace ArtDentifier
             //method for second metric
             Dictionary<string, double> secondMetricValues = testColor(artImage);
 
+            //method for third metric
+            Dictionary<string, double> thirdMetricValues = compareImageAlpha(artImage);
+
             //method for obtaining the mean column values
-            Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues);
+            Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues, thirdMetricValues);
 
             //fills the string array for the fields
             int i = 0;
@@ -65,8 +68,11 @@ namespace ArtDentifier
                 string temp2 = "" + secondMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
 
-                string temp3 = "" + averageColumnValues[artistName] + ".0000";
+                string temp3 = "" + thirdMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
+
+                string temp4 = "" + averageColumnValues[artistName] + ".0000";
+                arrayOfEachColumnCellValue[i + 20] = temp4.Substring(0, 6);
                 i++;
             }
             return arrayOfEachColumnCellValue;
@@ -100,7 +106,7 @@ namespace ArtDentifier
         }
         #endregion
 
-        #region ImageTypes
+        #region Colors
 
         private Dictionary<string, double> testColor(ArtImage artImage)
         {
@@ -110,12 +116,11 @@ namespace ArtDentifier
             Dictionary<string, double> redColorResults = compareImageRed(artImage);
             Dictionary<string, double> greenColorResults = compareImageGreen(artImage);
             Dictionary<string, double> blueColorResults = compareImageBlue(artImage);
-            Dictionary<string, double> alphaColorResults = compareImageAlpha(artImage);
 
             foreach (string artistName in allArtists.Keys)
             {
                 double meanColorValues = (redColorResults[artistName] + greenColorResults[artistName] 
-                    + blueColorResults[artistName] + alphaColorResults[artistName])/4;
+                    + blueColorResults[artistName])/3;
                 ColorResultReturns.Add(artistName, meanColorValues);
             }
 
@@ -197,6 +202,10 @@ namespace ArtDentifier
             return blueCheckRatios;
         }
 
+        #endregion
+
+        #region Saturation
+
         private Dictionary<string, double> compareImageAlpha(ArtImage artImage)
         {
             Dictionary<string, double> alphaCheckRatios = new Dictionary<string, double>();
@@ -226,12 +235,12 @@ namespace ArtDentifier
 
         #endregion
 
-        private Dictionary<string, double> getColumnAverages(Dictionary<string, double> column1, Dictionary<string, double> column2)
+        private Dictionary<string, double> getColumnAverages(Dictionary<string, double> column1, Dictionary<string, double> column2, Dictionary<string, double> column3)
         {
             Dictionary<string, double> averageColumnValues = new Dictionary<string, double>();
             foreach (string s in allArtists.Keys)
             {
-                double value = (column1[s] + column2[s])/2;
+                double value = (column1[s] + column2[s] + column3[s])/3;
                 averageColumnValues.Add(s, value);
             }
             return averageColumnValues;
@@ -280,8 +289,7 @@ namespace ArtDentifier
         {
             foreach (ArtImage image in kvp.Value)
             {
-                ArtImage clonedImage = image.clone();
-                new ColorScaleAspectDeterminer().determineBitFrequency(clonedImage);
+                new ColorScaleAspectDeterminer().determineBitFrequency(image);
             }
         }
         #endregion
