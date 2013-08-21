@@ -119,7 +119,7 @@ namespace ArtDentifier
                 ColorResultReturns.Add(artistName, meanColorValues);
             }
 
-            return redColorResults;
+            return ColorResultReturns;
         }
 
         private Dictionary<string, double> compareImageRed(ArtImage artImage)
