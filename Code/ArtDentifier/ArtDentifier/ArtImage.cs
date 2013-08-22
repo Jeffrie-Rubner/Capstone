@@ -58,11 +58,6 @@ namespace ArtDentifier
         {
             return IndividualColorTracker.getMostFrequentBlue();
         }
-
-        public byte getMostFrequentAlpha()
-        {
-            return IndividualColorTracker.getMostFrequentAlpha();
-        }
         #endregion
 
         public void countColor(Color color)

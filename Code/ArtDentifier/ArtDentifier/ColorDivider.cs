@@ -12,7 +12,6 @@ namespace ArtDentifier
         private Dictionary<int, int> RedOccurences;
         private Dictionary<int, int> GreenOccurences;
         private Dictionary<int, int> BlueOccurences;
-        private Dictionary<int, int> AlphaOccurences;
         private Dictionary<string, Dictionary<int, int>> OccurenceWrapper;
 
         public ColorDivider()
@@ -26,7 +25,6 @@ namespace ArtDentifier
             insertColor("red", color.R);
             insertColor("green", color.G);
             insertColor("blue", color.B);
-            insertColor("alpha", color.A);
         }
 
         private void insertColor(string s, byte b)
@@ -83,11 +81,9 @@ namespace ArtDentifier
             RedOccurences = new Dictionary<int, int>();
             GreenOccurences = new Dictionary<int, int>();
             BlueOccurences = new Dictionary<int, int>();
-            AlphaOccurences = new Dictionary<int, int>();
             OccurenceWrapper.Add("red", RedOccurences);
             OccurenceWrapper.Add("green", GreenOccurences);
             OccurenceWrapper.Add("blue", BlueOccurences);
-            OccurenceWrapper.Add("alpha", AlphaOccurences);
         }
     }
 }

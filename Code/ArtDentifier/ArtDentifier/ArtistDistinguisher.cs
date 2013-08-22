@@ -48,10 +48,11 @@ namespace ArtDentifier
             Dictionary<string, double> firstMetricValues = testDimensionAspect(artImage);
             
             //method for second metric
+            colorSAD.determineBitFrequency(artImage);
             Dictionary<string, double> secondMetricValues = testColor(artImage);
 
             //method for third metric
-            Dictionary<string, double> thirdMetricValues = compareImageAlpha(artImage);
+            Dictionary<string, double> thirdMetricValues = testImageSaturation(artImage);
 
             //method for obtaining the mean column values
             Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues, thirdMetricValues);
@@ -110,7 +111,6 @@ namespace ArtDentifier
 
         private Dictionary<string, double> testColor(ArtImage artImage)
         {
-            colorSAD.determineBitFrequency(artImage);
             Dictionary<string, double> ColorResultReturns = new Dictionary<string, double>();
 
             Dictionary<string, double> redColorResults = compareImageRed(artImage);
@@ -130,10 +130,10 @@ namespace ArtDentifier
         private Dictionary<string, double> compareImageRed(ArtImage artImage)
         {
             Dictionary<string, double> redCheckRatios = new Dictionary<string, double>();
+            byte inputRed = artImage.getMostFrequentRed();
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double redSimilarity = 0.00;
-                byte inputRed = artImage.getMostFrequentRed();
                 foreach (ArtImage a in lists)
                 {
                     byte redValue = a.getMostFrequentRed();
@@ -155,10 +155,10 @@ namespace ArtDentifier
         private Dictionary<string, double> compareImageGreen(ArtImage artImage)
         {
             Dictionary<string, double> greenCheckRatios = new Dictionary<string, double>();
+            byte inputGreen = artImage.getMostFrequentGreen();
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double greenSimilarity = 0.00;
-                byte inputGreen = artImage.getMostFrequentGreen();
                 foreach (ArtImage a in lists)
                 {
                     byte greenValue = a.getMostFrequentGreen();
@@ -180,10 +180,10 @@ namespace ArtDentifier
         private Dictionary<string, double> compareImageBlue(ArtImage artImage)
         {
             Dictionary<string, double> blueCheckRatios = new Dictionary<string, double>();
+            byte inputBlue = artImage.getMostFrequentBlue();
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double blueSimilarity = 0.00;
-                byte inputBlue = artImage.getMostFrequentBlue();
                 foreach (ArtImage a in lists)
                 {
                     byte blueValue = a.getMostFrequentBlue();
@@ -206,29 +206,14 @@ namespace ArtDentifier
 
         #region Saturation
 
-        private Dictionary<string, double> compareImageAlpha(ArtImage artImage)
+        private Dictionary<string, double> testImageSaturation(ArtImage artImage)
         {
-            Dictionary<string, double> alphaCheckRatios = new Dictionary<string, double>();
-            foreach (List<ArtImage> lists in allArtists.Values)
-            {
-                double alphaSimilarity = 0.00;
-                byte inputAlpha = artImage.getMostFrequentAlpha();
-                foreach (ArtImage a in lists)
-                {
-                    byte alphaValue = a.getMostFrequentAlpha();
-                    double alphaRatio = ((double)Math.Abs(alphaValue - inputAlpha)) / 255;
-                    double tempSimilarity = 1 - alphaRatio;
-                    alphaSimilarity = tempSimilarity > alphaSimilarity ? tempSimilarity : alphaSimilarity;
-                }
-                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
-                {
-                    if (kvp.Value.Equals(lists))
-                    {
-                        alphaCheckRatios.Add(kvp.Key, alphaSimilarity * 100);
-                    }
-                }
-            }
-            return alphaCheckRatios;
+            //this method will need to check all 3 colors byte value
+            //the method will need to make a check different than the color check.
+            //determine if the image is mostly high or low byte values
+
+
+            return null;
         }
 
         #endregion

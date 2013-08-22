@@ -38,7 +38,6 @@ namespace ArtDentifier
                     artImage.countColor(currentColor);
                 }
             }
-            Console.WriteLine("o1o");
         }
         #endregion
 
