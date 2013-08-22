@@ -69,7 +69,7 @@ namespace ArtDentifier
                 string temp2 = "" + secondMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
 
-                string temp3 = "" + thirdMetricValues[artistName] + ".0000";
+                string temp3 = "" + thirdMetricValues[artistName] + "0000";
                 arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
 
                 string temp4 = "" + averageColumnValues[artistName] + ".0000";
@@ -221,7 +221,7 @@ namespace ArtDentifier
                 {
                     int imageSaturation = a.getMeanValue("red") 
                         + a.getMeanValue("green") + a.getMeanValue("blue");
-                    double tempComparitor = 1 - (Math.Abs(inputSaturation - imageSaturation) / 765);
+                    double tempComparitor = 1 - (Math.Abs(inputSaturation - imageSaturation) / inputSaturation);
                     saturationComparitor += tempComparitor;
                     imageCount++;
                 }

@@ -74,21 +74,23 @@ namespace ArtDentifier
                 redValue += kvp.Key.R * kvp.Value;
                 blueValue += kvp.Key.B * kvp.Value;
                 greenValue += kvp.Key.G * kvp.Value;
-                colorCount++;
+                colorCount ++;
             }
-
             int returnValue = 0;
-            if (colorName.ToLower() == "red")
-            {
-                returnValue = (int)(redValue / colorCount);
-            }
-            else if (colorName.ToLower() == "blue")
-            {
-                returnValue = (int)(blueValue / colorCount);
-            }
-            else if (colorName.ToLower() == "green")
-            {
-                returnValue = (int)(blueValue / colorCount);
+            if (colorCount > 0)
+            {  
+                if (colorName.ToLower() == "red")
+                {
+                    returnValue = (int)(redValue / colorCount);
+                }
+                else if (colorName.ToLower() == "blue")
+                {
+                    returnValue = (int)(blueValue / colorCount);
+                }
+                else if (colorName.ToLower() == "green")
+                {
+                    returnValue = (int)(blueValue / colorCount);
+                }
             }
             return returnValue;
         }
