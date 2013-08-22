@@ -27,15 +27,6 @@ namespace ArtDentifier
             Height = ActualImage.PixelHeight;
             IndividualColorTracker = new ColorDivider();
         }
-
-        private ArtImage(BitmapImage bitmapImage, ColorDictionary colorDictionary)
-        {
-            ColorOccurenceCounter = colorDictionary;
-            ActualImage = bitmapImage;
-            Width = ActualImage.PixelWidth;
-            Height = ActualImage.PixelHeight;
-            IndividualColorTracker = new ColorDivider();
-        }
         #endregion
 
         public BitmapImage getBitmapImage()
@@ -71,12 +62,36 @@ namespace ArtDentifier
             return ColorOccurenceCounter.getMostFrequentColor();
         }
 
-        public ArtImage clone()
+        public int getMeanValue(string colorName)
         {
-            return new ArtImage(this.ActualImage, this.ColorOccurenceCounter);
+            Dictionary<Color,int> colors = ColorOccurenceCounter.getAllColors();
+            long colorCount = 0;
+            long redValue = 0;
+            long blueValue = 0;
+            long greenValue = 0;
+            foreach (KeyValuePair<Color,int> kvp in colors)
+            {
+                redValue += kvp.Key.R * kvp.Value;
+                blueValue += kvp.Key.B * kvp.Value;
+                greenValue += kvp.Key.G * kvp.Value;
+                colorCount++;
+            }
+
+            int returnValue = 0;
+            if (colorName.ToLower() == "red")
+            {
+                returnValue = (int)(redValue / colorCount);
+            }
+            else if (colorName.ToLower() == "blue")
+            {
+                returnValue = (int)(blueValue / colorCount);
+            }
+            else if (colorName.ToLower() == "green")
+            {
+                returnValue = (int)(blueValue / colorCount);
+            }
+            return returnValue;
         }
-
-
 
 
     }

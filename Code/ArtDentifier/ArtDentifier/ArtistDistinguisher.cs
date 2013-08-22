@@ -208,12 +208,33 @@ namespace ArtDentifier
 
         private Dictionary<string, double> testImageSaturation(ArtImage artImage)
         {
-            //this method will need to check all 3 colors byte value
-            //the method will need to make a check different than the color check.
-            //determine if the image is mostly high or low byte values
+            int redMeanValue = artImage.getMeanValue("red");
+            int greenMeanValue = artImage.getMeanValue("green");
+            int blueMeanValue = artImage.getMeanValue("blue");
+            int inputSaturation = redMeanValue + greenMeanValue + blueMeanValue;
+            Dictionary<string, double> returnValues = new Dictionary<string, double>();
+            foreach (List<ArtImage> lists in allArtists.Values)
+            {
+                double saturationComparitor = 0.0;
+                int imageCount = 0;
+                foreach (ArtImage a in lists)
+                {
+                    int imageSaturation = a.getMeanValue("red") 
+                        + a.getMeanValue("green") + a.getMeanValue("blue");
+                    double tempComparitor = 1 - (Math.Abs(inputSaturation - imageSaturation) / 765);
+                    saturationComparitor += tempComparitor;
+                    imageCount++;
+                }
+                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
+                {
+                    if (kvp.Value.Equals(lists))
+                    {
+                        returnValues.Add(kvp.Key, saturationComparitor / imageCount);
+                    }
+                }
+            }
 
-
-            return null;
+            return returnValues;
         }
 
         #endregion

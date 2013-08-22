@@ -11,7 +11,7 @@ namespace ArtDentifier
     class ColorDictionary
     {
         #region Fields
-        private Color[] Colors;
+        private Color[] colors;
         private int[] CountValue;
         private int listSize = 0;
         #endregion
@@ -19,7 +19,7 @@ namespace ArtDentifier
         #region Constructor
         public ColorDictionary()
         {
-            Colors = new Color[10];
+            colors = new Color[10];
             CountValue = new int[10];
         }
         #endregion
@@ -28,14 +28,14 @@ namespace ArtDentifier
         {
             for(int i = 0; i < listSize; i++)
             {
-                if (ColorComparitor.Compare(Colors[i], color))
+                if (ColorComparitor.Compare(colors[i], color))
                 {
                     CountValue[i]++;
                     return;
                 }
             }
             checkSize();
-            Colors[listSize] = color;
+            colors[listSize] = color;
             CountValue[listSize] = 1;
             listSize++;
         }
@@ -43,28 +43,38 @@ namespace ArtDentifier
         #region Getters
         public Color getMostFrequentColor()
         {
-            return Colors[getIndexOfGreatestFrequency()];
+            return colors[getIndexOfGreatestFrequency()];
         }
 
         public int getGreatestFrequency()
         {
             return CountValue[getIndexOfGreatestFrequency()];
         }
+
+        public Dictionary<Color, int> getAllColors()
+        {
+            Dictionary<Color, int> allColorDictionary = new Dictionary<Color,int>();
+            for (int i = 0; i < listSize; i++)
+            {
+                allColorDictionary.Add(colors[i], CountValue[i]);
+            }
+            return allColorDictionary;
+        }
         #endregion
 
         #region Private Methods
         private void checkSize()
         {
-            if (listSize >= Colors.Length)
+            if (listSize >= colors.Length)
             {
-                Color[] tempColors = new Color[Colors.Length * 2];
+                Color[] tempColors = new Color[colors.Length * 2];
                 int[] tempCounts = new int[CountValue.Length * 2];
                 for (int j = 0; j < listSize; j++)
                 {
-                    tempColors[j] = Colors[j];
+                    tempColors[j] = colors[j];
                     tempCounts[j] = CountValue[j];
                 }
-                Colors = tempColors;
+                colors = tempColors;
                 CountValue = tempCounts;
             }
         }
