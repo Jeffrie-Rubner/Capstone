@@ -69,7 +69,7 @@ namespace ArtDentifier
                 string temp2 = "" + secondMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
 
-                string temp3 = "" + thirdMetricValues[artistName] + "0000";
+                string temp3 = "" + thirdMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
 
                 string temp4 = "" + averageColumnValues[artistName] + ".0000";
@@ -229,7 +229,7 @@ namespace ArtDentifier
                 {
                     if (kvp.Value.Equals(lists))
                     {
-                        returnValues.Add(kvp.Key, saturationComparitor / imageCount);
+                        returnValues.Add(kvp.Key, Math.Abs((saturationComparitor / (double)imageCount) * 100));
                     }
                 }
             }

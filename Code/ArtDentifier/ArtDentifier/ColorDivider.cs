@@ -71,7 +71,14 @@ namespace ArtDentifier
                     valueOfMax = values;
                 }
             }
-            valueToReturn = (byte)OccurenceWrapper[s].FirstOrDefault(x => x.Value == valueOfMax).Key;
+            try
+            {
+                valueToReturn = (byte)OccurenceWrapper[s].FirstOrDefault(x => x.Value == valueOfMax).Key;
+            }
+            catch (InvalidOperationException invalidOE)
+            {
+                //gives inaccurate results, but prevents crashing
+            }
             return valueToReturn;
         }
         #endregion

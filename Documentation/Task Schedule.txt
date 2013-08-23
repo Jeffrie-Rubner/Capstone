@@ -39,11 +39,16 @@ edge detection
 Week 6
 --------
 Complete all metrics
-Show motivation on project
+**Show motivation on project
 
 Week 7
 ------
-Make actual progress on the project.
+*Make actual progress on the project.
 Complete all metrics (minimum 5)
 **Gather additional sample images
 **gather more test images
+
+Week 8
+------
+Complete edge detection methods
+Reduce start up speed to be less than 5 minutes
