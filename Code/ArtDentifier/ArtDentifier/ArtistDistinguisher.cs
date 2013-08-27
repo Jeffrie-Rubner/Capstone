@@ -52,10 +52,10 @@ namespace ArtDentifier
             Dictionary<string, double> secondMetricValues = testColor(artImage);
 
             //method for third metric
-            Dictionary<string, double> thirdMetricValues = testImageSaturation(artImage);
+            //Dictionary<string, double> thirdMetricValues = testImageSaturation(artImage);
 
             //method for obtaining the mean column values
-            Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues, thirdMetricValues);
+            Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues);
 
             //fills the string array for the fields
             int i = 0;
@@ -89,19 +89,35 @@ namespace ArtDentifier
         {
             Dictionary<string, double> DimensionalCheckRatios = new Dictionary<string, double>();
             double dimensionalRatio = dimensionAnalyzer.getDimensionRatio(artImage);
+          
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double dimensionalSimilarity = 0.00;
+                int i = 1;
                 foreach (ArtImage a in lists)
                 {
                     double currentImageRatio = dimensionAnalyzer.getDimensionRatio(a);
                     double tempSimilarity = 1 - Math.Abs(dimensionalRatio - currentImageRatio);
-                    dimensionalSimilarity = tempSimilarity > dimensionalSimilarity ? tempSimilarity : dimensionalSimilarity;
+                    if (tempSimilarity == 1)
+                    {
+                        dimensionalSimilarity = 1;
+                        break;
+                    }
+                    else
+                    {
+                        if (tempSimilarity - (dimensionalSimilarity / i) > -20)
+                        {
+                            dimensionalSimilarity = dimensionalSimilarity + tempSimilarity;
+                            i++;
+                        }
+                    }
+                    
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
                 {
                     if(kvp.Value.Equals(lists))
                     {
+                        dimensionalSimilarity = dimensionalSimilarity == 1 ? 1 : (dimensionalSimilarity / i); 
                         DimensionalCheckRatios.Add(kvp.Key, dimensionalSimilarity * 100);
                     }
                 }
@@ -137,17 +153,28 @@ namespace ArtDentifier
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double redSimilarity = 0.00;
+                int i = 1;
                 foreach (ArtImage a in lists)
                 {
                     byte redValue = a.getMostFrequentRed();
                     double redRatio = ((double)Math.Abs(redValue - inputRed)) / 255;
                     double tempSimilarity = 1 - redRatio;
-                    redSimilarity = tempSimilarity > redSimilarity ? tempSimilarity : redSimilarity;
+                    if (tempSimilarity == 1)
+                    {
+                        redSimilarity = 1;
+                        break;
+                    }
+                    else
+                    {
+                            redSimilarity = redSimilarity + tempSimilarity;
+                            i++;
+                    }
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
                 {
                     if (kvp.Value.Equals(lists))
                     {
+                        redSimilarity = redSimilarity == 1 ? 1 : (redSimilarity / i); 
                         redCheckRatios.Add(kvp.Key, redSimilarity * 100);
                     }
                 }
@@ -162,17 +189,28 @@ namespace ArtDentifier
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double greenSimilarity = 0.00;
+                int i = 1;
                 foreach (ArtImage a in lists)
                 {
                     byte greenValue = a.getMostFrequentGreen();
-                    double greenRatio = ((double)Math.Abs(greenValue - inputGreen)) / 255;
-                    double tempSimilarity = 1 - greenRatio;
-                    greenSimilarity = tempSimilarity > greenSimilarity ? tempSimilarity : greenSimilarity;
+                    double redRatio = ((double)Math.Abs(greenValue - inputGreen)) / 255;
+                    double tempSimilarity = 1 - redRatio;
+                    if (tempSimilarity == 1)
+                    {
+                        greenSimilarity = 1;
+                        break;
+                    }
+                    else
+                    {
+                            greenSimilarity = greenSimilarity + tempSimilarity;
+                            i++;
+                    }
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
                 {
                     if (kvp.Value.Equals(lists))
                     {
+                        greenSimilarity = greenSimilarity == 1 ? 1 : (greenSimilarity / i);
                         greenCheckRatios.Add(kvp.Key, greenSimilarity * 100);
                     }
                 }
@@ -187,17 +225,28 @@ namespace ArtDentifier
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double blueSimilarity = 0.00;
+                int i = 1;
                 foreach (ArtImage a in lists)
                 {
                     byte blueValue = a.getMostFrequentBlue();
-                    double blueRatio = ((double)Math.Abs(blueValue - inputBlue)) / 255;
-                    double tempSimilarity = 1 - blueRatio;
-                    blueSimilarity = tempSimilarity > blueSimilarity ? tempSimilarity : blueSimilarity;
+                    double redRatio = ((double)Math.Abs(blueValue - inputBlue)) / 255;
+                    double tempSimilarity = 1 - redRatio;
+                    if (tempSimilarity == 1)
+                    {
+                        blueSimilarity = 1;
+                        break;
+                    }
+                    else
+                    {
+                            blueSimilarity = blueSimilarity + tempSimilarity;
+                            i++;
+                    }
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
                 {
                     if (kvp.Value.Equals(lists))
                     {
+                        blueSimilarity = blueSimilarity == 1 ? 1 : (blueSimilarity / i);
                         blueCheckRatios.Add(kvp.Key, blueSimilarity * 100);
                     }
                 }
@@ -271,6 +320,17 @@ namespace ArtDentifier
             foreach (string s in allArtists.Keys)
             {
                 double value = (column1[s] + column2[s] + column3[s])/3;
+                averageColumnValues.Add(s, value);
+            }
+            return averageColumnValues;
+        }
+
+        private Dictionary<string, double> getColumnAverages(Dictionary<string, double> column1, Dictionary<string, double> column2)
+        {
+            Dictionary<string, double> averageColumnValues = new Dictionary<string, double>();
+            foreach (string s in allArtists.Keys)
+            {
+                double value = (column1[s] + column2[s]) / 2;
                 averageColumnValues.Add(s, value);
             }
             return averageColumnValues;
