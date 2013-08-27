@@ -50,5 +50,6 @@ Complete all metrics (minimum 5)
 
 Week 8
 ------
-Complete edge detection methods
-Reduce start up speed to be less than 5 minutes
+xxComplete edge detection methods
+xxReduce start up speed to be less than 5 minutes
+DO MACHINE LEARNING

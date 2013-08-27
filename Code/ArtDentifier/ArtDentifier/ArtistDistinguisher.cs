@@ -76,6 +76,9 @@ namespace ArtDentifier
                 arrayOfEachColumnCellValue[i + 20] = temp4.Substring(0, 6);
                 i++;
             }
+
+            arrayOfEachColumnCellValue = SortBySimilarity(arrayOfEachColumnCellValue);
+
             return arrayOfEachColumnCellValue;
         }
 
@@ -240,6 +243,27 @@ namespace ArtDentifier
         #endregion
 
         #endregion
+
+
+        private string[] SortBySimilarity(string[] columnCells)
+        {
+            for (int i = 21; i < 25; i++)
+            {
+                if(Convert.ToDouble(columnCells[i]) > Convert.ToDouble(columnCells[i-1]))
+                {
+                    for (int j = 0; j < 20; j += 5)
+                    {
+                        string temp = columnCells[i - j];
+                        columnCells[i - j] = columnCells[(i - j) - 1];
+                        columnCells[(i - j) - 1] = temp;
+                    }
+                    
+                    i--;
+                }
+            }
+
+            return columnCells;
+        }
 
         private Dictionary<string, double> getColumnAverages(Dictionary<string, double> column1, Dictionary<string, double> column2, Dictionary<string, double> column3)
         {
