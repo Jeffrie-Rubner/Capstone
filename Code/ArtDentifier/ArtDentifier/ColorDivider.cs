@@ -64,6 +64,8 @@ namespace ArtDentifier
         {
             int valueOfMax = 0;
             byte valueToReturn = 0;
+            try
+            {
             foreach(int values in OccurenceWrapper[s].Values)
             {
                 if (values > valueOfMax)
@@ -71,8 +73,6 @@ namespace ArtDentifier
                     valueOfMax = values;
                 }
             }
-            try
-            {
                 valueToReturn = (byte)OccurenceWrapper[s].FirstOrDefault(x => x.Value == valueOfMax).Key;
             }
             catch (InvalidOperationException invalidOE)

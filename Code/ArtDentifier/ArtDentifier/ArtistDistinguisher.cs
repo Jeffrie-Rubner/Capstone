@@ -15,7 +15,7 @@ namespace ArtDentifier
     class ArtistDistinguisher
     {
         //working cells is the value of the (number of working metrics +1) times 5
-        private readonly int WorkingCellCount = 25;
+        private readonly int WorkingCellCount = 20;
 
         #region Storage Fields
         private Dictionary<string, List<ArtImage>> allArtists = new Dictionary<string, List<ArtImage>>();
@@ -69,11 +69,11 @@ namespace ArtDentifier
                 string temp2 = "" + secondMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
 
-                string temp3 = "" + thirdMetricValues[artistName] + ".0000";
-                arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
+           //     string temp3 = "" + thirdMetricValues[artistName] + ".0000";
+           //     arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
 
                 string temp4 = "" + averageColumnValues[artistName] + ".0000";
-                arrayOfEachColumnCellValue[i + 20] = temp4.Substring(0, 6);
+                arrayOfEachColumnCellValue[i + 15] = temp4.Substring(0, 6);
                 i++;
             }
 
@@ -232,7 +232,8 @@ namespace ArtDentifier
                 {
                     if (kvp.Value.Equals(lists))
                     {
-                        returnValues.Add(kvp.Key, Math.Abs((saturationComparitor / (double)imageCount) * 100));
+                        double result = Math.Abs((saturationComparitor / (double)imageCount) * 100) > 100 ? 100 : Math.Abs((saturationComparitor / (double)imageCount) * 100);
+                        returnValues.Add(kvp.Key, result);
                     }
                 }
             }
@@ -247,18 +248,17 @@ namespace ArtDentifier
 
         private string[] SortBySimilarity(string[] columnCells)
         {
-            for (int i = 21; i < 25; i++)
+            for (int i = 15; i < 19; i++)
             {
-                if(Convert.ToDouble(columnCells[i]) > Convert.ToDouble(columnCells[i-1]))
+                if(Convert.ToDouble(columnCells[i]) > Convert.ToDouble(columnCells[i+1]))
                 {
-                    for (int j = 0; j < 20; j += 5)
+                    for (int j = 0; j <= 15; j += 5)
                     {
                         string temp = columnCells[i - j];
-                        columnCells[i - j] = columnCells[(i - j) - 1];
-                        columnCells[(i - j) - 1] = temp;
-                    }
-                    
-                    i--;
+                        columnCells[i - j] = columnCells[(i - j) + 1];
+                        columnCells[(i - j) + 1] = temp;
+                    } 
+                    i = 15;
                 }
             }
 
