@@ -141,5 +141,12 @@ namespace ArtDentifier
             }
         }
         #endregion
+
+        private void DetermineArtist()
+        {
+            ResultWindow resultWindow = new ResultWindow();
+            resultWindow.ShowDialog();
+        }
+
     }
 }
