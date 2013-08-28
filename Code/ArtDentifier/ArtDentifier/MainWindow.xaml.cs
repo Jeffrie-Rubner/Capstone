@@ -84,6 +84,7 @@ namespace ArtDentifier
                         resultGrid[k, j].Text = artistChanceValues[k, j];
                     }
                 }
+                DetermineArtist();
             }
             else
             {

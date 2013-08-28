@@ -1,8 +1,13 @@
 ﻿<Window x:Class="ArtDentifier.ResultWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ResultWindow" Height="300" Width="400">
+        Title="ResultWindow" Height="350" Width="550">
     <Grid>
-        
+            <RadioButton Name ="RadioButton1" Content="RadioButton1" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="95" Margin="22,272,0,0"/>
+        <RadioButton Name ="RadioButton2" Content="RadioButton2" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="122,272,0,0"/>
+        <RadioButton Name ="RadioButton3" Content="RadioButton3" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="99" Margin="222,272,0,0"/>
+        <RadioButton Name ="RadioButton4" Content="RadioButton4" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="100" Margin="326,272,0,0"/>
+        <RadioButton x:Name ="RadioButton5" Content="RadioButton5" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="103" Margin="431,272,0,0" RenderTransformOrigin="2.198,1.682"/>
+
     </Grid>
 </Window>
