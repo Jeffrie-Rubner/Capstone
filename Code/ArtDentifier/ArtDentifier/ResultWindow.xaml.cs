@@ -23,5 +23,19 @@ namespace ArtDentifier
         {
             InitializeComponent();
         }
+
+        public void SetTextBox(String[] results)
+        {
+            string[] artistNames = new string[5];
+            string[] averages = new string[5];
+            for (int i = 0; i < 5; i++)
+            {
+                artistNames[i] = results[4 - i];
+                averages[i] = results[(results.Length - 1) - i];
+            }
+
+
+        }
+
     }
 }

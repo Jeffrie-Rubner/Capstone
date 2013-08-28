@@ -84,7 +84,7 @@ namespace ArtDentifier
                         resultGrid[k, j].Text = artistChanceValues[k, j];
                     }
                 }
-                DetermineArtist();
+                DetermineArtist(results);
             }
             else
             {
@@ -143,10 +143,11 @@ namespace ArtDentifier
         }
         #endregion
 
-        private void DetermineArtist()
+        private void DetermineArtist(String[] results)
         {
             ResultWindow resultWindow = new ResultWindow();
             resultWindow.ShowDialog();
+            resultWindow.SetTextBox(results);
         }
 
     }
