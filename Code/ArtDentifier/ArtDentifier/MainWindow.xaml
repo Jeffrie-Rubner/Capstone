@@ -67,7 +67,8 @@
             <TextBlock Name="Column5Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="5" Height="26" Width="54"/>
             <TextBlock Name="Column5Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="5" Height="26" Width="54"/>
             <TextBlock Name="Column5Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="5" Height="26" Width="54" />
-            
+            <CheckBox  Name="CheckBox1" Grid.ColumnSpan="3" Content="Teaching Mode" Grid.Column="3" HorizontalAlignment="Left" Margin="0.6,34.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="127" Height="20" Checked="CheckBox_Checked_1"/>
+
         </Grid>
     </Grid>
 </Window>

@@ -62,6 +62,8 @@ namespace ArtDentifier
             ArtistResultBox.Text = resultString;
         }
 
+        #region ClickListeners
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             string confirmedArtist = null;
@@ -86,8 +88,7 @@ namespace ArtDentifier
                 confirmedArtist = (string)RadioButton5.Content;
             }
 
-
-
+            artDistinguisher.AddArtImage(confirmedArtist, InputImage);
             this.Close();
 
         }
@@ -96,5 +97,7 @@ namespace ArtDentifier
         {
             SubmitButton.Visibility = System.Windows.Visibility.Visible; 
         }
+
+        #endregion
     }
 }
