@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ResultWindow" Height="350" Width="550">
     <Grid>
-        <Grid Margin="22,237,10,62.8">
+        <Grid Margin="22,233,10,62">
             <RadioButton x:Name ="RadioButton1" Content="Van Gogh" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100"/>
             <RadioButton x:Name ="RadioButton2" Content="Monet" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="100,0,0,0"/>
             <RadioButton x:Name ="RadioButton3" Content="Raphael" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="200,0,0,0"/>
@@ -12,6 +12,7 @@
 
         </Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="208,281,0,0" VerticalAlignment="Top" Width="97" Height="30"/>
-        <TextBlock HorizontalAlignment="Left" Margin="110,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" Width="300"/>
+        <TextBlock Name ="ArtistResultBox" Text="default" HorizontalAlignment="Center" TextWrapping="Wrap" Height="80" Width="350" Margin="0, 0, 0, 50"/>
+        <TextBlock HorizontalAlignment="Left" Margin="171,212,0,0" TextWrapping="Wrap" Text="Please Select The Correct Artist"  VerticalAlignment="Top" Width="363"/>
     </Grid>
 </Window>

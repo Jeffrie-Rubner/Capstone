@@ -146,8 +146,9 @@ namespace ArtDentifier
         private void DetermineArtist(String[] results)
         {
             ResultWindow resultWindow = new ResultWindow();
-            resultWindow.ShowDialog();
             resultWindow.SetTextBox(results);
+            resultWindow.ShowDialog();
+            
         }
 
     }

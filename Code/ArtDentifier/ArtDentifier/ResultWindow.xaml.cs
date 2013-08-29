@@ -26,14 +26,35 @@ namespace ArtDentifier
 
         public void SetTextBox(String[] results)
         {
-            string[] artistNames = new string[5];
-            string[] averages = new string[5];
+            List<string> artistNames = new List<string>();
+            double[] averageValues = new double[5];
             for (int i = 0; i < 5; i++)
             {
-                artistNames[i] = results[4 - i];
-                averages[i] = results[(results.Length - 1) - i];
+                averageValues[i] = Convert.ToDouble(results[(results.Length - 1) - i]);
             }
-
+            for (int i = 0; i < 5; i++)
+            {
+                if (averageValues[0] - averageValues[i] < 5)
+                {
+                    artistNames.Add(results[i]);
+                }
+            }
+            string resultString;
+            if (artistNames.Count > 1)
+            {
+                resultString = "The results are inconclusive. The artist could be ";
+                for (int j = 0; j < artistNames.Count - 1; j++)
+                {
+                    resultString += artistNames[j] + ", ";
+                }
+                resultString += "or " + artistNames[artistNames.Count - 1]; 
+            }
+            else
+            {
+                resultString = "The Artist of this image is " + artistNames[0];
+            }
+            
+            ArtistResultBox.Text = resultString;
 
         }
 
