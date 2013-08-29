@@ -146,12 +146,9 @@ namespace ArtDentifier
 
         private void DetermineArtist(String[] results, ArtImage image)
         {
-            if ((bool)CheckBox1.IsChecked)
-            {
-                ResultWindow resultWindow = new ResultWindow(artdentifier);
-                resultWindow.SetTextBox(results, image);
-                resultWindow.ShowDialog();
-            }
+            ResultWindow resultWindow = new ResultWindow(artdentifier);
+            resultWindow.SetTextBox(results, image);
+            resultWindow.ShowDialog();
             
         }
 
