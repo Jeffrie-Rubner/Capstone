@@ -4,14 +4,14 @@
         Title="ResultWindow" Height="350" Width="550">
     <Grid>
         <Grid Margin="22,233,10,62">
-            <RadioButton x:Name ="RadioButton1" Content="Van Gogh" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100"/>
-            <RadioButton x:Name ="RadioButton2" Content="Monet" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="100,0,0,0"/>
-            <RadioButton x:Name ="RadioButton3" Content="Raphael" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="200,0,0,0"/>
-            <RadioButton x:Name ="RadioButton4" Content="Picasso" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="304,0,0,0"/>
-            <RadioButton x:Name ="RadioButton5" Content="Blake" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="409,0,0,0" RenderTransformOrigin="2.198,1.682"/>
+            <RadioButton x:Name ="RadioButton1" Content="Van Gogh" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name ="RadioButton2" Content="Monet" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="100,0,0,0" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name ="RadioButton3" Content="Raphael" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="200,0,0,0" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name ="RadioButton4" Content="Picasso" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="304,0,0,0" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name ="RadioButton5" Content="Blake" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="100" Margin="409,0,0,0" Checked="RadioButton_Checked"/>
 
         </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="208,281,0,0" VerticalAlignment="Top" Width="97" Height="30"/>
+        <Button Name ="SubmitButton" Content="Submit" Visibility="Hidden" HorizontalAlignment="Left" Margin="208,281,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="Button_Click_1"/>
         <TextBlock Name ="ArtistResultBox" Text="default" HorizontalAlignment="Center" TextWrapping="Wrap" Height="80" Width="350" Margin="0, 0, 0, 50"/>
         <TextBlock HorizontalAlignment="Left" Margin="171,212,0,0" TextWrapping="Wrap" Text="Please Select The Correct Artist"  VerticalAlignment="Top" Width="363"/>
     </Grid>

@@ -39,9 +39,8 @@ namespace ArtDentifier
         }
         #endregion
 
-        public string[] AnalyzePicture(BitmapImage bitmapImage)
+        public string[] AnalyzePicture(ArtImage artImage)
         {
-            ArtImage artImage = new ArtImage(bitmapImage);
             string[] arrayOfEachColumnCellValue = new string[WorkingCellCount];
 
             //method that compares first metric
@@ -80,6 +79,11 @@ namespace ArtDentifier
             arrayOfEachColumnCellValue = SortBySimilarity(arrayOfEachColumnCellValue);
 
             return arrayOfEachColumnCellValue;
+        }
+
+        public void AddArtImage(string artistName, ArtImage artImage)
+        {
+            allArtists[artistName].Add(artImage);
         }
 
         #region Metric Measuring Methods
@@ -294,6 +298,7 @@ namespace ArtDentifier
 
         #endregion
 
+        #region PrivateMethods
 
         private string[] SortBySimilarity(string[] columnCells)
         {
@@ -335,6 +340,8 @@ namespace ArtDentifier
             }
             return averageColumnValues;
         }
+
+        #endregion
 
         #region InitializationMethods
         private void AddArtistsToDictionary()

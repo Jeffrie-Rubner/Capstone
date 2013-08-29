@@ -66,7 +66,8 @@ namespace ArtDentifier
         {
             if (ImagePreview.Source != null)
             {
-                string[] results = artdentifier.AnalyzePicture((BitmapImage)ImagePreview.Source);
+                ArtImage artImage = new ArtImage((BitmapImage)ImagePreview.Source);
+                string[] results = artdentifier.AnalyzePicture(artImage);
                 ResultBox.Text = "";
                 ArtistHeader.Text = "Artist Names";
                 Column1Header.Text = "Dimensions";
@@ -84,7 +85,7 @@ namespace ArtDentifier
                         resultGrid[k, j].Text = artistChanceValues[k, j];
                     }
                 }
-                DetermineArtist(results);
+                DetermineArtist(results, artImage);
             }
             else
             {
@@ -143,10 +144,10 @@ namespace ArtDentifier
         }
         #endregion
 
-        private void DetermineArtist(String[] results)
+        private void DetermineArtist(String[] results, ArtImage image)
         {
-            ResultWindow resultWindow = new ResultWindow();
-            resultWindow.SetTextBox(results);
+            ResultWindow resultWindow = new ResultWindow(artdentifier);
+            resultWindow.SetTextBox(results, image);
             resultWindow.ShowDialog();
             
         }

@@ -19,13 +19,18 @@ namespace ArtDentifier
     /// </summary>
     public partial class ResultWindow : Window
     {
-        public ResultWindow()
+        private ArtImage InputImage;
+        private ArtistDistinguisher artDistinguisher;
+
+        public ResultWindow(ArtistDistinguisher ad)
         {
+            artDistinguisher = ad;
             InitializeComponent();
         }
 
-        public void SetTextBox(String[] results)
+        public void SetTextBox(String[] results, ArtImage image)
         {
+            InputImage = image;
             List<string> artistNames = new List<string>();
             double[] averageValues = new double[5];
             for (int i = 0; i < 5; i++)
@@ -55,8 +60,41 @@ namespace ArtDentifier
             }
             
             ArtistResultBox.Text = resultString;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string confirmedArtist = null;
+            if ((bool)RadioButton1.IsChecked)
+            {
+                confirmedArtist = (string)RadioButton1.Content;
+            }
+            else if ((bool)RadioButton2.IsChecked)
+            {
+                confirmedArtist = (string)RadioButton2.Content;
+            }
+            else if ((bool)RadioButton3.IsChecked)
+            {
+                confirmedArtist = (string)RadioButton3.Content;
+            }
+            else if ((bool)RadioButton4.IsChecked)
+            {
+                confirmedArtist = (string)RadioButton4.Content;
+            }
+            else if ((bool)RadioButton5.IsChecked)
+            {
+                confirmedArtist = (string)RadioButton5.Content;
+            }
+
+
+
+            this.Close();
 
         }
 
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SubmitButton.Visibility = System.Windows.Visibility.Visible; 
+        }
     }
 }
