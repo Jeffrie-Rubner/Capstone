@@ -26,7 +26,7 @@ Get 5 relevant metrics working
 	**get frequency of colors done
 	determine 3 more metrics to work on
 **Make Functional GUI
-research sampling
+**research sampling
 **research edge detection
 
 Week 5

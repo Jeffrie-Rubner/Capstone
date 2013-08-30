@@ -10,6 +10,7 @@ namespace ArtDentifier
 {
     public class ArtImage
     {
+        #region Fields and Properties
         private BitmapImage ActualImage;
         private double width;
         public double Width {get{return width;} private set{width = value;}}
@@ -17,6 +18,7 @@ namespace ArtDentifier
         public double Height {get{return height;} private set{height = value;}}
         private ColorDictionary ColorOccurenceCounter;
         private ColorDivider IndividualColorTracker;
+        #endregion
 
         #region Constructor
         public ArtImage(BitmapImage bitmapImage)
