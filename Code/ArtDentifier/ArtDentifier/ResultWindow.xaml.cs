@@ -35,11 +35,12 @@ namespace ArtDentifier
             double[] averageValues = new double[5];
             for (int i = 0; i < 5; i++)
             {
-                averageValues[i] = Convert.ToDouble(results[(results.Length - 1) - i]);
+                averageValues[i] = Convert.ToDouble(results[(results.Length - 5) + i]);
             }
-            for (int i = 0; i < 5; i++)
+            artistNames.Add(results[4]);
+            for (int i = 0; i < 4; i++)
             {
-                if (averageValues[0] - averageValues[i] < 5)
+                if (averageValues[4] - averageValues[i] < 5)
                 {
                     artistNames.Add(results[i]);
                 }
