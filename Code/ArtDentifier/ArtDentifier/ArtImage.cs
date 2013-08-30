@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace ArtDentifier
 {
-    class ArtImage
+    public class ArtImage
     {
         private BitmapImage ActualImage;
         private double width;

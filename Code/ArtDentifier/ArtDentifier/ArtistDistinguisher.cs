@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
  */
 namespace ArtDentifier
 {
-    class ArtistDistinguisher
+    public class ArtistDistinguisher
     {
         //working cells is the value of the (number of working metrics +1) times 5
         private readonly int WorkingCellCount = 20;

@@ -155,5 +155,10 @@ namespace ArtDentifier
             
         }
 
+        private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
