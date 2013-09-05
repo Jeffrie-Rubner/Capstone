@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
             <TextBlock Name="ResultBox"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Artist results will appear here" VerticalAlignment="Top" Width="305" Height="17" Grid.ColumnSpan="6" Margin="0,10,0,0"/>
             <Button Content="Submit" Height="32" HorizontalAlignment="Right" 
-        		x:Name="ImageSubmitter" VerticalAlignment="Bottom" Width="230" Click="button2_Click" Grid.Row="6" Margin="0,0,0.157,9.8" Grid.ColumnSpan="6"/>
+        		x:Name="ImageSubmitter" VerticalAlignment="Bottom" Width="245" Click="button2_Click" Grid.Row="6" Margin="0,0,-0.2,9.8" Grid.ColumnSpan="4" Grid.Column="2"/>
             <TextBlock Name="Artist1" HorizontalAlignment="Left" Margin="0,27,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Height="27" Width="82" Grid.ColumnSpan="2"/>
             <TextBlock Name="Artist2" HorizontalAlignment="Left" Margin="0,26.8,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="82" Grid.Row="1"/>
             <TextBlock Name="Artist3" HorizontalAlignment="Left" Margin="0,26.6,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="27" Width="82" Grid.Row="2"/>
@@ -67,7 +67,8 @@
             <TextBlock Name="Column5Row3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="3" Grid.Column="5" Height="26" Width="54"/>
             <TextBlock Name="Column5Row2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="5" Height="26" Width="54"/>
             <TextBlock Name="Column5Row1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="5" Height="26" Width="54" />
-            <CheckBox  Name="CheckBox1" Grid.ColumnSpan="3" Content="Teaching Mode" Grid.Column="3" HorizontalAlignment="Left" Margin="0.6,34.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="127" Height="20" Checked="CheckBox_Checked_1"/>
+            <CheckBox  Name="CheckBox1" Grid.ColumnSpan="3" Content="Manual Teaching" Grid.Column="1" HorizontalAlignment="Left" Margin="69.8,34.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="119" Height="20" Checked="CheckBox_Checked_1"/>
+            <CheckBox  Name="CheckBox2" Grid.ColumnSpan="3" Content="Automatic Teaching" Grid.Column="3" HorizontalAlignment="Left" Margin="53.6,34.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="128" Height="20" Checked="CheckBox_Checked_2"/>
 
         </Grid>
     </Grid>

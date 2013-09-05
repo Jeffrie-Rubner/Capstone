@@ -63,6 +63,34 @@ namespace ArtDentifier
             ArtistResultBox.Text = resultString;
         }
 
+        public void AutomaticBox(String[] results, ArtImage image)
+        {
+            InputImage = image;
+            List<string> artistNames = new List<string>();
+            double[] averageValues = new double[5];
+            for (int i = 0; i < 5; i++)
+            {
+                averageValues[i] = Convert.ToDouble(results[(results.Length - 5) + i]);
+            }
+            artistNames.Add(results[4]);
+            for (int i = 0; i < 4; i++)
+            {
+                if (averageValues[4] - averageValues[i] < 5)
+                {
+                    artistNames.Add(results[i]);
+                }
+            }
+            string resultString;
+            if (artistNames.Count > 1)
+            {
+
+            }
+            else
+            {
+                artDistinguisher.AddArtImage(artistNames[0], InputImage);
+            }
+        }
+
         #region ClickListeners
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

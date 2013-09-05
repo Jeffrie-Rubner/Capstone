@@ -51,7 +51,7 @@ namespace ArtDentifier
             Dictionary<string, double> secondMetricValues = testColor(artImage);
 
             //method for third metric
-            //Dictionary<string, double> thirdMetricValues = testImageSaturation(artImage);
+            //Dictionary<string, double> thirdMetricValues = 
 
             //method for obtaining the mean column values
             Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues);
@@ -256,42 +256,6 @@ namespace ArtDentifier
                 }
             }
             return blueCheckRatios;
-        }
-
-        #endregion
-
-        #region Saturation
-
-        private Dictionary<string, double> testImageSaturation(ArtImage artImage)
-        {
-            int redMeanValue = artImage.getMeanValue("red");
-            int greenMeanValue = artImage.getMeanValue("green");
-            int blueMeanValue = artImage.getMeanValue("blue");
-            int inputSaturation = redMeanValue + greenMeanValue + blueMeanValue;
-            Dictionary<string, double> returnValues = new Dictionary<string, double>();
-            foreach (List<ArtImage> lists in allArtists.Values)
-            {
-                double saturationComparitor = 0.0;
-                int imageCount = 0;
-                foreach (ArtImage a in lists)
-                {
-                    int imageSaturation = a.getMeanValue("red") 
-                        + a.getMeanValue("green") + a.getMeanValue("blue");
-                    double tempComparitor = 1 - (Math.Abs(inputSaturation - imageSaturation) / inputSaturation);
-                    saturationComparitor += tempComparitor;
-                    imageCount++;
-                }
-                foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
-                {
-                    if (kvp.Value.Equals(lists))
-                    {
-                        double result = Math.Abs((saturationComparitor / (double)imageCount) * 100) > 100 ? 100 : Math.Abs((saturationComparitor / (double)imageCount) * 100);
-                        returnValues.Add(kvp.Key, result);
-                    }
-                }
-            }
-
-            return returnValues;
         }
 
         #endregion

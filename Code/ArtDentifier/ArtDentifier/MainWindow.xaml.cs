@@ -152,12 +152,21 @@ namespace ArtDentifier
                 resultWindow.SetTextBox(results, image);
                 resultWindow.ShowDialog();
             }
+            else if ((bool)CheckBox2.IsChecked)
+            {
+
+            }
             
         }
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
+            CheckBox2.IsChecked = false;
+        }
 
+        private void CheckBox_Checked_2(object sender, RoutedEventArgs e)
+        {
+            CheckBox1.IsChecked = false;
         }
 
     }
