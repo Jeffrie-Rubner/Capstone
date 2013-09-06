@@ -80,12 +80,7 @@ namespace ArtDentifier
                     artistNames.Add(results[i]);
                 }
             }
-            string resultString;
-            if (artistNames.Count > 1)
-            {
-
-            }
-            else
+            if (!(artistNames.Count > 1))
             {
                 artDistinguisher.AddArtImage(artistNames[0], InputImage);
             }

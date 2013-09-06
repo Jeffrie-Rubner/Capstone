@@ -52,4 +52,10 @@ Week 8
 ------
 xxComplete edge detection methods
 xxReduce start up speed to be less than 5 minutes
-DO MACHINE LEARNING
+**DO MACHINE LEARNING
+	(used clustering to allow for the machine to become more intelligent)
+Week 9
+------
+Edge detection
+**Machine Learning Research
+**Working Application
