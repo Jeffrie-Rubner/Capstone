@@ -45,13 +45,10 @@ namespace ArtDentifier
 
             //method that compares first metric
             Dictionary<string, double> firstMetricValues = testDimensionAspect(artImage);
-            
+
             //method for second metric
             colorSAD.determineBitFrequency(artImage);
             Dictionary<string, double> secondMetricValues = testColor(artImage);
-
-            //method for third metric
-            //Dictionary<string, double> thirdMetricValues = 
 
             //method for obtaining the mean column values
             Dictionary<string, double> averageColumnValues = getColumnAverages(firstMetricValues, secondMetricValues);
@@ -67,9 +64,6 @@ namespace ArtDentifier
 
                 string temp2 = "" + secondMetricValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 10] = temp2.Substring(0, 6);
-
-           //     string temp3 = "" + thirdMetricValues[artistName] + ".0000";
-           //     arrayOfEachColumnCellValue[i + 15] = temp3.Substring(0, 6);
 
                 string temp4 = "" + averageColumnValues[artistName] + ".0000";
                 arrayOfEachColumnCellValue[i + 15] = temp4.Substring(0, 6);
@@ -93,7 +87,7 @@ namespace ArtDentifier
         {
             Dictionary<string, double> DimensionalCheckRatios = new Dictionary<string, double>();
             double dimensionalRatio = dimensionAnalyzer.getDimensionRatio(artImage);
-          
+
             foreach (List<ArtImage> lists in allArtists.Values)
             {
                 double dimensionalSimilarity = 0.00;
@@ -115,13 +109,13 @@ namespace ArtDentifier
                             i++;
                         }
                     }
-                    
+
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
                 {
-                    if(kvp.Value.Equals(lists))
+                    if (kvp.Value.Equals(lists))
                     {
-                        dimensionalSimilarity = dimensionalSimilarity == 1 ? 1 : (dimensionalSimilarity / i); 
+                        dimensionalSimilarity = dimensionalSimilarity == 1 ? 1 : (dimensionalSimilarity / i);
                         DimensionalCheckRatios.Add(kvp.Key, dimensionalSimilarity * 100);
                     }
                 }
@@ -142,8 +136,8 @@ namespace ArtDentifier
 
             foreach (string artistName in allArtists.Keys)
             {
-                double meanColorValues = (redColorResults[artistName] + greenColorResults[artistName] 
-                    + blueColorResults[artistName])/3;
+                double meanColorValues = (redColorResults[artistName] + greenColorResults[artistName]
+                    + blueColorResults[artistName]) / 3;
                 ColorResultReturns.Add(artistName, meanColorValues);
             }
 
@@ -170,15 +164,15 @@ namespace ArtDentifier
                     }
                     else
                     {
-                            redSimilarity = redSimilarity + tempSimilarity;
-                            i++;
+                        redSimilarity = redSimilarity + tempSimilarity;
+                        i++;
                     }
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
                 {
                     if (kvp.Value.Equals(lists))
                     {
-                        redSimilarity = redSimilarity == 1 ? 1 : (redSimilarity / i); 
+                        redSimilarity = redSimilarity == 1 ? 1 : (redSimilarity / i);
                         redCheckRatios.Add(kvp.Key, redSimilarity * 100);
                     }
                 }
@@ -206,8 +200,8 @@ namespace ArtDentifier
                     }
                     else
                     {
-                            greenSimilarity = greenSimilarity + tempSimilarity;
-                            i++;
+                        greenSimilarity = greenSimilarity + tempSimilarity;
+                        i++;
                     }
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
@@ -242,8 +236,8 @@ namespace ArtDentifier
                     }
                     else
                     {
-                            blueSimilarity = blueSimilarity + tempSimilarity;
-                            i++;
+                        blueSimilarity = blueSimilarity + tempSimilarity;
+                        i++;
                     }
                 }
                 foreach (KeyValuePair<String, List<ArtImage>> kvp in allArtists)
@@ -262,20 +256,59 @@ namespace ArtDentifier
 
         #endregion
 
+        public double calculateAccuracy()
+        {
+            double accuracy = 0.0;
+            int imageCount = 0;
+            int correctGuesses = 0;
+            string dir = @"c:\Users\Jeff\Documents\GitHub\Capstone\Documentation\Misc\Z_TestImages\";
+            string[] filePaths = Directory.GetFiles(dir);
+            foreach (string str in filePaths)
+            {
+                if (isAnImageType(str))
+                {
+                    Uri artistLocation = new Uri(str);
+                    try
+                    {
+                        BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(artistLocation);
+                        ArtImage ai = new ArtImage(myBitmapImage, str);
+                        Console.WriteLine(ai.KnownArtistName);
+                        string[] results = AnalyzePicture(ai);
+                        string[,] artistChanceValues = new string[4, 5];
+                        for (int i = 0; i < results.Length; i++)
+                        {
+                            artistChanceValues[i / 5, i % 5] = results[i];
+                        }
+                        if (ai.KnownArtistName.Contains(artistChanceValues[0, 4]))
+                        {
+                            correctGuesses++;
+                        }
+                        imageCount++;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("error with " + str);
+                    }
+                }
+            }
+            accuracy = ((double)correctGuesses) / ((double)imageCount);
+            return accuracy;
+        }
+
         #region PrivateMethods
 
         private string[] SortBySimilarity(string[] columnCells)
         {
             for (int i = 15; i < 19; i++)
             {
-                if(Convert.ToDouble(columnCells[i]) > Convert.ToDouble(columnCells[i+1]))
+                if (Convert.ToDouble(columnCells[i]) > Convert.ToDouble(columnCells[i + 1]))
                 {
                     for (int j = 0; j <= 15; j += 5)
                     {
                         string temp = columnCells[i - j];
                         columnCells[i - j] = columnCells[(i - j) + 1];
                         columnCells[(i - j) + 1] = temp;
-                    } 
+                    }
                     i = 15;
                 }
             }
@@ -288,7 +321,7 @@ namespace ArtDentifier
             Dictionary<string, double> averageColumnValues = new Dictionary<string, double>();
             foreach (string s in allArtists.Keys)
             {
-                double value = (column1[s] + column2[s] + column3[s])/3;
+                double value = (column1[s] + column2[s] + column3[s]) / 3;
                 averageColumnValues.Add(s, value);
             }
             return averageColumnValues;
@@ -332,15 +365,19 @@ namespace ArtDentifier
             string[] filePaths = Directory.GetFiles(dir);
             foreach (string str in filePaths)
             {
-                Uri artistLocation = new Uri(str);
-                try
+                if (isAnImageType(str))
                 {
-                    BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(artistLocation);
-                    kvp.Value.Add(new ArtImage(myBitmapImage));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.StackTrace);
+                    Uri artistLocation = new Uri(str);
+                    try
+                    {
+                        BitmapImage myBitmapImage = BitmapImageFromURI.GetBitmapImage(artistLocation);
+                        kvp.Value.Add(new ArtImage(myBitmapImage, str));
+                    }
+
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("error with " + str);
+                    }
                 }
             }
             InitializeColors(kvp);
@@ -354,5 +391,14 @@ namespace ArtDentifier
             }
         }
         #endregion
+
+        private bool isAnImageType(string str)
+        {
+            bool isImage = false;
+            string[] imageEndings = { ".jpg", ".bmp", ".gif", ".png", ".jpeg" };
+            int results = imageEndings.Where(x => str.EndsWith(x)).Select(y => y).Count();
+            isImage = results > 0;
+            return isImage;
+        }
     }
 }

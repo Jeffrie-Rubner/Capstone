@@ -11,6 +11,7 @@ namespace ArtDentifier
     public class ArtImage
     {
         #region Fields and Properties
+        public readonly string KnownArtistName;
         private BitmapImage ActualImage;
         private double width;
         public double Width {get{return width;} private set{width = value;}}
@@ -21,8 +22,9 @@ namespace ArtDentifier
         #endregion
 
         #region Constructor
-        public ArtImage(BitmapImage bitmapImage)
+        public ArtImage(BitmapImage bitmapImage, string _artistName)
         {
+            KnownArtistName = trimName(_artistName);
             ColorOccurenceCounter = new ColorDictionary();
             ActualImage = bitmapImage;
             Width = ActualImage.PixelWidth;
@@ -91,12 +93,17 @@ namespace ArtDentifier
                 }
                 else if (colorName.ToLower() == "green")
                 {
-                    returnValue = (int)(blueValue / colorCount);
+                    returnValue = (int)(greenValue / colorCount);
                 }
             }
             return returnValue;
         }
 
-
+        private string trimName(String artistName)
+        {
+            string[] urlParts = artistName.Split("\\".ToCharArray());
+            artistName = urlParts[urlParts.Length - 1].Split(".".ToCharArray())[0];
+            return artistName;
+        }
     }
 }

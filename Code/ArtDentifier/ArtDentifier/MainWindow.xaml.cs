@@ -27,6 +27,7 @@ namespace ArtDentifier
         private ArtistDistinguisher artdentifier;
         private string[,] artistChanceValues;
         private TextBlock[,] resultGrid;
+        string fileName;
         #endregion
 
         #region Constructor
@@ -43,10 +44,11 @@ namespace ArtDentifier
         #region ButtonEvents
         private void button1_Click(object sender, EventArgs e)
         {
+            clearGrid();
             OpenFileDialog openFD = new OpenFileDialog();
             openFD.Filter = "Image Files (*.jpg, *.bmp, *.gif, *.png, *.jpeg)" +
                 "|*.jpg;*.bmp;*.gif;*.png;*.jpeg";
-            string fileName;
+
             if (openFD.ShowDialog() != DialogResult)
             {
                 try
@@ -66,13 +68,12 @@ namespace ArtDentifier
         {
             if (ImagePreview.Source != null)
             {
-                ArtImage artImage = new ArtImage((BitmapImage)ImagePreview.Source);
+                ArtImage artImage = new ArtImage((BitmapImage)ImagePreview.Source, fileName);
                 string[] results = artdentifier.AnalyzePicture(artImage);
                 ResultBox.Text = "";
                 ArtistHeader.Text = "Artist Names";
                 Column1Header.Text = "Dimensions";
                 Column2Header.Text = "Colors";
-             //   Column3Header.Text = "Saturation";
                 Column3Header.Text = "Average";
                 for (int i = 0; i < results.Length; i++)
                 { 
@@ -159,6 +160,14 @@ namespace ArtDentifier
             
         }
 
+        private void clearGrid()
+        {
+            foreach (TextBlock tb in resultGrid)
+            {
+                tb.Text = "";
+            }
+        }
+
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
             CheckBox2.IsChecked = false;
@@ -168,6 +177,14 @@ namespace ArtDentifier
         {
             CheckBox1.IsChecked = false;
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            double accuracy = artdentifier.calculateAccuracy();
+            MessageBox.Show("Calculated Accuracy is " + (accuracy*100) + "%");
+        }
+
+
 
     }
 }
