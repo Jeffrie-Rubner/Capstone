@@ -29,13 +29,16 @@ namespace ProperArtdentifier
                 for (int y = 0; y < bitmap.Height; y++)
                 {
                     int index = (y * stride) + (4 * x);
-                    currentR = roundNumber(pixels[index]) > 250 ? 255 : roundNumber(pixels[index]);
-                    currentG = roundNumber(pixels[index + 1]) > 250 ? 255 : roundNumber(pixels[index+ 1]);
-                    currentB = roundNumber(pixels[index + 2]) > 250 ? 255 : roundNumber(pixels[index + 2]);
-                    currentA = roundNumber(pixels[index + 3]) > 250 ? 255 : roundNumber(pixels[index + 3]);
+                    if (index < pixels.Length)
+                    {
+                        currentR = roundNumber(pixels[index]) > 250 ? 255 : roundNumber(pixels[index]);
+                        currentG = roundNumber(pixels[index + 1]) > 250 ? 255 : roundNumber(pixels[index + 1]);
+                        currentB = roundNumber(pixels[index + 2]) > 250 ? 255 : roundNumber(pixels[index + 2]);
+                        currentA = roundNumber(pixels[index + 3]) > 250 ? 255 : roundNumber(pixels[index + 3]);
 
-                    Color currentColor = Color.FromArgb((byte)currentA, (byte)currentR, (byte)currentG, (byte)currentB);
-                    artImage.countColor(currentColor);
+                        Color currentColor = Color.FromArgb((byte)currentA, (byte)currentR, (byte)currentG, (byte)currentB);
+                        artImage.countColor(currentColor);
+                    }
                 }
             }
         }

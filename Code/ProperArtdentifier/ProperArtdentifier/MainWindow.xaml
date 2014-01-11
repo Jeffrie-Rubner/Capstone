@@ -10,8 +10,9 @@
     			VerticalAlignment="Bottom" Width="250" Click="button3_Click" Margin="25,0,25,35"/>
             <Image Name="ImagePreview" Margin="0,0,0,110"/>
         </Grid>
-        
-        <Button Content="Cluster" HorizontalAlignment="Left" Margin="487,436,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+
+        <Button Name="AccButton" Content="Accuracy" HorizontalAlignment="Left" Margin="642,424,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden" Click="Button_Click_2"/>
+        <Button Content="Cluster" HorizontalAlignment="Left" Margin="438,424,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Width="500" Height="325" Margin="0,105,10,105">
             <ListBox Name="c1_listBox" HorizontalAlignment="Left" Height="255" VerticalAlignment="Bottom" Width="100" 
                      Margin="0,0,0,25" MouseMove="c1_listBox_MouseMove_1">

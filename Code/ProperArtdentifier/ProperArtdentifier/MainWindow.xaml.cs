@@ -57,6 +57,7 @@ namespace ProperArtdentifier
                 {
                     SubmitButton.Visibility = Visibility.Visible;
                 }
+                AccButton.Visibility = Visibility.Visible;
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -212,6 +213,12 @@ namespace ProperArtdentifier
                 listBoxItem.ToolTip = tt;
                 ToolTipService.SetInitialShowDelay(listBoxItem, 1);
             } 
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            double accuracy = clusterer.calculateAccuracy();
+            MessageBox.Show("Calculated Accuracy is " + (accuracy * 100) + "%");
         }
     }
 }

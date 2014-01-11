@@ -41,18 +41,21 @@ namespace ProperArtdentifier
                 ChangeOccurred = false;
                 foreach (ArtImage art_image in imagesToCluster)
                 {
-                    double bestDistance = 10000;
-                    string clusterName = "cluster0";
-                    for (int i = 0; i < CLUSTER_COUNT; i++)
+                    if (art_image != null)
                     {
-                        double currentDistance = getDistance(clusterPoints[i], art_image);
-                        if (currentDistance <= bestDistance)
+                        double bestDistance = 10000;
+                        string clusterName = "cluster0";
+                        for (int i = 0; i < CLUSTER_COUNT; i++)
                         {
-                            bestDistance = currentDistance;
-                            clusterName = "cluster" + (i+1);
+                            double currentDistance = getDistance(clusterPoints[i], art_image);
+                            if (currentDistance <= bestDistance)
+                            {
+                                bestDistance = currentDistance;
+                                clusterName = "cluster" + (i + 1);
+                            }
                         }
+                        clusters[clusterName].Add(art_image);
                     }
-                    clusters[clusterName].Add(art_image);
                 }
                 IClusterableItem[] newClusterPoints = new IClusterableItem[CLUSTER_COUNT];
                 for (int i = 0; i < CLUSTER_COUNT; i++)
@@ -69,14 +72,14 @@ namespace ProperArtdentifier
                         clusterPoints[i] = newClusterPoints[i];
                     }
                 }
-                if (ChangeOccurred)
+                loopCount++;
+                if (ChangeOccurred || loopCount < 200)
                 {
                     clusters = new Dictionary<string, List<ArtImage>>();
                     CreateClusters();
                 }
-                Console.WriteLine(++loopCount);
             }
-            while (ChangeOccurred);
+            while (ChangeOccurred || loopCount < 200);
             return clusters;
         }
 
@@ -220,12 +223,15 @@ namespace ProperArtdentifier
             string name ="";
             foreach (ArtImage ai in imagesToCluster)
             {
-                string artImageName = "";
-                string[] urlParts = ai.KnownArtistName.Split("\\".ToCharArray());
-                artImageName = urlParts[urlParts.Length - 1].Split(".".ToCharArray())[0];
-                if (itemName.Equals(artImageName))
+                if (ai != null)
                 {
-                    name = ai.KnownArtistName;
+                    string artImageName = "";
+                    string[] urlParts = ai.KnownArtistName.Split("\\".ToCharArray());
+                    artImageName = urlParts[urlParts.Length - 1].Split(".".ToCharArray())[0];
+                    if (itemName.Equals(artImageName))
+                    {
+                        name = ai.KnownArtistName;
+                    }
                 }
             }
             return name;
@@ -245,5 +251,28 @@ namespace ProperArtdentifier
             return imagesToCluster.Count == EXPECTED_IMAGE_COUNT;
         }
 
+        public double calculateAccuracy()
+        {
+            int correctImageCount = 0;
+            foreach (List<ArtImage> listOfImages in clusters.Values)
+            {
+                int blake = listOfImages.Where(x => trimName(x.KnownArtistName).StartsWith("blake")).Select(x=> x).Count();
+                int vangogh = listOfImages.Where(x => trimName(x.KnownArtistName).StartsWith("vangogh")).Select(x => x).Count();
+                int monet = listOfImages.Where(x => trimName(x.KnownArtistName).StartsWith("monet")).Select(x => x).Count();
+                int picasso = listOfImages.Where(x => trimName(x.KnownArtistName).StartsWith("picasso")).Select(x => x).Count();
+                int raphael = listOfImages.Where(x => trimName(x.KnownArtistName).StartsWith("raphael")).Select(x => x).Count();
+
+                correctImageCount += new List<int> { blake, vangogh, monet, picasso, raphael }.Max();
+            }
+
+            return ((double)correctImageCount) / EXPECTED_IMAGE_COUNT;
+        }
+
+        private string trimName(String artistName)
+        {
+            string[] urlParts = artistName.Split("\\".ToCharArray());
+            artistName = urlParts[urlParts.Length - 1].Split(".".ToCharArray())[0];
+            return artistName;
+        }
     }
 }

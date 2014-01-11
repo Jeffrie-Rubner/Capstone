@@ -13,6 +13,8 @@ namespace ProperArtdentifier
         protected double height;
         public double Height { get { return height; } protected set { height = value; } }
 
+        public double Dimension { get { return round(width / height); } }
+
         protected byte red = 0;
         protected byte blue = 0;
         protected byte green = 0;
@@ -32,5 +34,13 @@ namespace ProperArtdentifier
             return (b1 && b2 && b3 && b4 && b5);
 
         }
+
+        private double round(double doub)
+        {
+            doub = doub * 10;
+            int doubInt = (int)doub;
+            return doubInt / 10.0;
+        }
+
     }
 }
